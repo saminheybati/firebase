@@ -15,13 +15,14 @@ export class FileUploadService {
     const filePath = `${this.db}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
-
     uploadTask.snapshotChanges().pipe(
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           fileUpload.url = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
+          console.log('percentage', fileUpload)
+
         });
       })
     ).subscribe();
