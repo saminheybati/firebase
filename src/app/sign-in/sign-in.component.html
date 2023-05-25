@@ -1,0 +1,25 @@
+
+<div style="display: flex;justify-content: center">
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box" style="margin-top: 100px">
+    <button mat-raised-button  color="warn" class="btn-block" style="margin-bottom: 20px" (click)="authService.GoogleAuth()">Continue with Google</button>
+
+    <mat-card-header>
+<!--      <mat-card-title>Log in to saminWeb</mat-card-title>-->
+    </mat-card-header>
+    <form class="example-form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="email">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password">
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-raised-button  color="primary" class="btn-block">Log in</button>
+    </form>
+  </mat-card>
+  <h3>Don't have an account?
+  <span style="color: #4b349a;cursor: pointer;font-weight: bolder">Sing up</span></h3>
+</div>
+</div>
