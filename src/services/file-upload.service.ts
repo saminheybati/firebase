@@ -4,9 +4,12 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {FileUpload} from "../model/fileUpload";
 import {finalize, Observable} from "rxjs";
 
+
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class FileUploadService {
   private dbPath = '/uploads'
 
@@ -34,5 +37,4 @@ export class FileUploadService {
   private saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.dbPath).push(fileUpload);
   }
-
 }
