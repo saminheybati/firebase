@@ -9,7 +9,6 @@ import {FileUpload} from "../../model/fileUpload";
 })
 export class FileUploadComponent implements OnInit {
 
-
   selectedFiles?: FileList;
   currentFileUpload?: FileUpload;
   percentage = 0;
