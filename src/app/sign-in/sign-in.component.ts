@@ -3,6 +3,7 @@ import {AuthServiceService} from "../../services/auth-service.service";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "@angular/fire/auth";
 import {MatDialog} from "@angular/material/dialog";
 import {CustomizedDialogComponent} from "./customized-dialog/customized-dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -14,6 +15,7 @@ export class SignInComponent implements OnInit {
   password: any
 
   constructor(public authService: AuthServiceService,
+              protected _Router: Router,
               public dialog: MatDialog) {
   }
 
@@ -27,6 +29,7 @@ export class SignInComponent implements OnInit {
         .then((userCredential) => {
           // Signed in
           console.log('sign in shod ')
+          this._Router.navigateByUrl('/access-levels')
           const user = userCredential.user;
           // ...
         })

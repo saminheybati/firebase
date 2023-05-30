@@ -1,0 +1,74 @@
+<div style="display: flex;justify-content: center;margin-top: 100px">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 80%!important;margin-top: 100px">
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Role Title">
+      <th mat-header-cell *matHeaderCellDef> Role Title</th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Capture">
+      <th mat-header-cell *matHeaderCellDef> Capture</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.isCapture" [disabled]="element.title==='Admin' || element.title==='Default'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Setting">
+      <th mat-header-cell *matHeaderCellDef> Setting</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.isSetting"  [disabled]="element.title==='Admin'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Template Builder">
+      <th mat-header-cell *matHeaderCellDef> Template Builder</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.isTemplateBuilder"  [disabled]="element.title==='Admin'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Template Capture">
+      <th mat-header-cell *matHeaderCellDef> Template Capture</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.isTemplateCapture"  [disabled]="element.title==='Admin'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Manage Users">
+      <th mat-header-cell *matHeaderCellDef> Manage Users</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.isUsers"  [disabled]="element.title==='Admin'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Edit User Models">
+      <th mat-header-cell *matHeaderCellDef> Edit User Models</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.isUserModels"  [disabled]="element.title==='Admin'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="All Spins">
+      <th mat-header-cell *matHeaderCellDef> All Spins</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.isAllSpins"  [disabled]="element.title==='Admin'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Access Levels">
+      <th mat-header-cell *matHeaderCellDef> Access Levels</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.isAccessLevels"  [disabled]="element.title==='Admin'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

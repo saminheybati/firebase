@@ -25,6 +25,8 @@ import initializeApp = firebase.initializeApp;
 import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
 import { CustomizedDialogComponent } from './sign-in/customized-dialog/customized-dialog.component';
+import {AccessLevelsComponent} from "./access-levels/access-levels.component";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -43,7 +45,8 @@ const fireBaseConfig = {
     SignInComponent,
     UserListComponent,
     FileUploadComponent,
-    CustomizedDialogComponent
+    CustomizedDialogComponent,
+    AccessLevelsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ const fireBaseConfig = {
     FormsModule,
     MatButtonModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [DataBaseService],
   bootstrap: [AppComponent]
