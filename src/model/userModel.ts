@@ -5,6 +5,6 @@ export class User {
   // createTs: number | undefined;
   // isActive: boolean | undefined;
   // isAdmin: boolean | undefined;
-  // thumbRef: string | undefined;
+  thumbRef: string | undefined;
 
 }

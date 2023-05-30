@@ -15,7 +15,6 @@ export class AppComponent {
   editKey :string=''
 
   constructor(private dataBaseService: DataBaseService) {
-    this.getUsersList()
   }
 
   addUserToFireBase() {
@@ -39,7 +38,6 @@ export class AppComponent {
       })
       .catch(err => console.log(err));
     }
-
   }
 
   getUsersList() {

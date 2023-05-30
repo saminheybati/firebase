@@ -3,17 +3,18 @@ import 'firebase/auth';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import 'firebase/auth';
 import {GoogleAuthProvider} from 'firebase/auth';
+import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
+  auth = getAuth();
 
   constructor(public afAuth: AngularFireAuth) {
   }
 
   GoogleAuth() {
-
     return this.AuthLogin(new GoogleAuthProvider());
   }
 
@@ -27,5 +28,9 @@ export class AuthServiceService {
         // console.log(error);
       });
   }
+
+
+
+
 
 }

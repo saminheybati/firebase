@@ -22,6 +22,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {getAnalytics} from "@angular/fire/analytics";
 import firebase from "firebase/compat";
 import initializeApp = firebase.initializeApp;
+import {MatTableModule} from "@angular/material/table";
+import {MatDialogModule} from "@angular/material/dialog";
+import { CustomizedDialogComponent } from './sign-in/customized-dialog/customized-dialog.component';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -39,7 +42,8 @@ const fireBaseConfig = {
     AppComponent,
     SignInComponent,
     UserListComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    CustomizedDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,9 @@ const fireBaseConfig = {
     AngularFirestoreModule,
     AngularFireStorageModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [DataBaseService],
   bootstrap: [AppComponent]
