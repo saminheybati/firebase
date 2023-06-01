@@ -1,18 +1,19 @@
 
 
-<div style="display: flex;justify-content: space-around;margin: 30px">
-  <div>
-    <label>name</label>
-    <input [(ngModel)]="name">
-  </div>
-  <app-file-upload></app-file-upload>
-  <button (click)="addUserToFireBase()" style="margin-left: 20px">
-    <span *ngIf="!editMode">  add user to fire base   </span>
-    <span *ngIf="editMode"> update user  </span>
-  </button>
-</div>
+<!--<div style="display: flex;justify-content: space-around;margin: 30px">-->
+<!--  <div>-->
+<!--    <label>name</label>-->
+<!--    <input [(ngModel)]="name">-->
+<!--  </div>-->
+<!--  <app-file-upload></app-file-upload>-->
+<!--  <button (click)="addUserToFireBase()" style="margin-left: 20px">-->
+<!--    <span *ngIf="!editMode">  add user to fire base   </span>-->
+<!--    <span *ngIf="editMode"> update user  </span>-->
+<!--  </button>-->
+<!--</div>-->
 
-<hr>
+<button mat-raised-button  color="primary" class="btn-block" style="margin: 80px" [routerLink]="'/access-levels'">Users List</button>
+
 
 <div style="display: flex;justify-content: center">
 

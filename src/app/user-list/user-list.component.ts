@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {DataBaseService} from "../../services/data-base.service";
 import {map} from "rxjs";
 import {deleteUser} from "@angular/fire/auth";
+import firebase from "firebase/compat";
+import User = firebase.User;
 
 @Component({
   selector: 'app-user-list',
@@ -9,7 +11,7 @@ import {deleteUser} from "@angular/fire/auth";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  dataSource: any;
+  dataSource: User[];
   displayedColumns: string[] = [ 'name', 'delete', 'edit','image'];
   name: string = ''
   editMode = false
@@ -30,8 +32,8 @@ export class UserListComponent implements OnInit {
         )
       )
     ).subscribe(data => {
-      this.dataSource = data
-      console.log(this.dataSource)
+      // this.dataSource = data
+      console.log('users',data)
     });
   }
 

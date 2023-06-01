@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {AccessLevelsComponent} from "./access-levels/access-levels.component";
+import {UserListComponent} from "./user-list/user-list.component";
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'access-levels',
     component: AccessLevelsComponent,
+  },
+  {
+    path: 'users',
+    component: UserListComponent,
   },
 ];
 

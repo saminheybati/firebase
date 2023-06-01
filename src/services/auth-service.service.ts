@@ -14,8 +14,12 @@ export class AuthServiceService {
 
   constructor(public afAuth: AngularFireAuth,
               protected _Router: Router,) {
+
   }
 
+  getAllUsers(){
+
+  }
   GoogleAuth() {
     return this.AuthLogin(new GoogleAuthProvider());
   }
