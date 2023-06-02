@@ -21,6 +21,8 @@ export class AccessLevelsService {
   }
   getOneByKey(key:string){
   return this.db.list(this.dbPath,ref=>ref.orderByKey().equalTo(key))
-
+  }
+  updateItem(key,value){
+    return this.accessLevelRef.update(key, value);
   }
 }

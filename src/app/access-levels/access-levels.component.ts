@@ -16,6 +16,8 @@ export class AccessLevelsComponent implements OnInit {
     this.getAccLvlsList()
   }
 
+  selectedForEdit:any
+
   constructor(private accessLevelService: AccessLevelsService,) {
     let accLvl = {
       id: "default",
@@ -59,10 +61,22 @@ export class AccessLevelsComponent implements OnInit {
     });
   }
 
-  editTitle(element) {
+  getItem(element) {
     this.accessLevelService.getOneByKey(element.key).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          (c.payload.val())
+        )
+      )
     ).subscribe(data => {
-      console.log("data", data)
+      console.log("data", data[0])
+      this.selectedForEdit=data[0]
     });
+    // this.accessLevelService.updateItem(element.key,element)
+  }
+
+  updateTitle() {
+    console.log(this.selectedForEdit)
+    this.accessLevelService.updateItem(this.selectedForEdit.key,this.selectedForEdit)
   }
 }
