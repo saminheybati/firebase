@@ -11,8 +11,8 @@ import User = firebase.User;
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  dataSource: User[];
-  displayedColumns: string[] = [ 'name', 'delete', 'edit','image'];
+  dataSource: any[];
+  displayedColumns: string[] = [ 'name', 'email', 'role'];
   name: string = ''
   editMode = false
   editKey: string = ''
@@ -32,7 +32,7 @@ export class UserListComponent implements OnInit {
         )
       )
     ).subscribe(data => {
-      // this.dataSource = data
+      this.dataSource = data
       console.log('users',data)
     });
   }

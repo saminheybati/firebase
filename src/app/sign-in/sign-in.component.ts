@@ -4,6 +4,10 @@ import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} fro
 import {MatDialog} from "@angular/material/dialog";
 import {CustomizedDialogComponent} from "./customized-dialog/customized-dialog.component";
 import {Router} from "@angular/router";
+import {doc, setDoc} from "@angular/fire/firestore";
+import firebase from "firebase/compat";
+import {User} from "../../model/userModel";
+import {DataBaseService} from "../../services/data-base.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -16,6 +20,7 @@ export class SignInComponent implements OnInit {
 
   constructor(public authService: AuthServiceService,
               protected _Router: Router,
+              private userService:DataBaseService,
               public dialog: MatDialog) {
   }
 
@@ -49,8 +54,9 @@ export class SignInComponent implements OnInit {
       createUserWithEmailAndPassword(auth, this.email, this.password).then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        // ...
-      })
+        console.log("user",user)
+        this.addUserDataToDB(user)
+        })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -61,8 +67,21 @@ export class SignInComponent implements OnInit {
     }
 
   }
-
-  openDialog() {
-    this.dialog.open(CustomizedDialogComponent)
+  addUserDataToDB(user:any){
+    let userObject:User={
+      id:user.uid,
+      email:user.email,
+      ts:'timeStamp',
+      accessLevel:'default',
+      isTermsAccepted:'true',
+      phone:'not created',
+      username:'not created',
+      signUpTimeStamp:'15445658888',
+      displayName:'not created',
+      isDisabled:false,
+      avatarFullPath:user.photoURL
+    }
+    this.userService.addUser(userObject)
   }
+
 }

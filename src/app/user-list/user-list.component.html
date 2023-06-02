@@ -12,7 +12,7 @@
 <!--  </button>-->
 <!--</div>-->
 
-<button mat-raised-button  color="primary" class="btn-block" style="margin: 80px" [routerLink]="'/access-levels'">Users List</button>
+<button mat-raised-button  color="primary" class="btn-block" style="margin: 80px" [routerLink]="'/access-levels'">Access Levels</button>
 
 
 <div style="display: flex;justify-content: center">
@@ -25,25 +25,35 @@
   </ng-container>
 
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <th mat-header-cell *matHeaderCellDef> Display Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.username}} </td>
   </ng-container>
 
- <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef> delete user  </th>
-    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">delete</td>
-  </ng-container>
- <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef> edit user  </th>
-    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">edit</td>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
   </ng-container>
 
- <ng-container matColumnDef="image">
-    <th mat-header-cell *matHeaderCellDef>user image </th>
-    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">
-
-    </td>
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef>Role </th>
+    <td mat-cell *matCellDef="let element"> {{element.accessLevel}} </td>
   </ng-container>
+
+<!-- <ng-container matColumnDef="delete">-->
+<!--    <th mat-header-cell *matHeaderCellDef> delete user  </th>-->
+<!--    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">delete</td>-->
+<!--  </ng-container>-->
+<!-- <ng-container matColumnDef="edit">-->
+<!--    <th mat-header-cell *matHeaderCellDef> edit user  </th>-->
+<!--    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">edit</td>-->
+<!--  </ng-container>-->
+
+<!-- <ng-container matColumnDef="image">-->
+<!--    <th mat-header-cell *matHeaderCellDef>user image </th>-->
+<!--    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">-->
+
+<!--    </td>-->
+<!--  </ng-container>-->
 
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

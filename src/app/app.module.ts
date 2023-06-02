@@ -6,7 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {DataBaseService} from "../services/data-base.service";
 import {getFirestore, provideFirestore} from "@angular/fire/firestore";
-import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireModule, FIREBASE_OPTIONS} from "@angular/fire/compat";
 import {FormsModule} from "@angular/forms";
 import {SignInComponent} from './sign-in/sign-in.component';
 import {MatInputModule} from "@angular/material/input";
@@ -27,6 +27,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { CustomizedDialogComponent } from './sign-in/customized-dialog/customized-dialog.component';
 import {AccessLevelsComponent} from "./access-levels/access-levels.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatIconModule} from "@angular/material/icon";
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -48,27 +49,30 @@ const fireBaseConfig = {
     CustomizedDialogComponent,
     AccessLevelsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireDatabaseModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressBarModule,
-    AngularFireModule.initializeApp(fireBaseConfig),
-    provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    FormsModule,
-    MatButtonModule,
-    MatTableModule,
-    MatDialogModule,
-    MatCheckboxModule
+    imports: [
+        BrowserModule,
+      AppRoutingModule,
+        AngularFireDatabaseModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatProgressBarModule,
+        AngularFireModule.initializeApp(fireBaseConfig),
+        provideFirestore(() => getFirestore()),
+        BrowserAnimationsModule,
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        FormsModule,
+        MatButtonModule,
+        MatTableModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatIconModule
+    ],
+  providers: [DataBaseService,
+    { provide: FIREBASE_OPTIONS, useValue: fireBaseConfig }
   ],
-  providers: [DataBaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

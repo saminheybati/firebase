@@ -11,26 +11,41 @@ import {map} from "rxjs";
 export class AccessLevelsComponent implements OnInit {
   dataSource: AccessLvlModel[];
   displayedColumns: string[] = ['Role Title', 'Capture', 'Setting', 'Template Builder', 'Template Capture', 'Manage Users', 'Edit User Models', 'All Spins', 'Access Levels'];
+
   ngOnInit(): void {
     this.getAccLvlsList()
   }
-  constructor(private accessLevelService: AccessLevelsService) {
+
+  constructor(private accessLevelService: AccessLevelsService,) {
+    let accLvl = {
+      id: "default",
+      isAccessLevels: false,
+      isAllSpins: false,
+      isCapture: true,
+      isEdit: false,
+      isSetting: true,
+      isTemplateBuilder: false,
+      isTemplateCapture: true,
+      isUserModels: true,
+      isUsers: true,
+      title: "Level3"
+    }
+    // this.accLvlService.create(accLvl)
     // this.accessLevelService.addNewAccLvl({
     //   id: "default",
     //   isAccessLevels: false,
     //   isAllSpins: false,
     //   isCapture: true,
     //   isEdit: false,
-    //   isSetting: false,
-    //   isTemplateBuilder: true,
-    //   isTemplateCapture: false,
-    //   isUserModels: false,
-    //   isUsers: false,
-    //   title: "test"
-    // }).then(() => {
-    //   console.log("add shod ")
+    //   isSetting: true,
+    //   isTemplateBuilder: false,
+    //   isTemplateCapture: true,
+    //   isUserModels: true,
+    //   isUsers: true,
+    //   title: "Level3"
     // })
   }
+
   getAccLvlsList() {
     this.accessLevelService.getList().snapshotChanges().pipe(
       map(changes =>
@@ -44,4 +59,10 @@ export class AccessLevelsComponent implements OnInit {
     });
   }
 
+  editTitle(element) {
+    this.accessLevelService.getOneByKey(element.key).snapshotChanges().pipe(
+    ).subscribe(data => {
+      console.log("data", data)
+    });
+  }
 }

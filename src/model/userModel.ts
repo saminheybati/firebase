@@ -3,9 +3,9 @@ import {AccessLvlModel} from "./accessLvlModel";
 export class User {
   id: string;
   ts: string;
-  accessLevel: AccessLvlModel
+  accessLevel: string
   email: string
-isTermsAccepted:boolean
+isTermsAccepted:string
   phone:string
   username:string
   signUpTimeStamp:string

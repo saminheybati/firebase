@@ -19,4 +19,8 @@ export class AccessLevelsService {
   addNewAccLvl(accessLevel:AccessLvlModel){
     return this.accessLevelRef?.push(accessLevel)
   }
+  getOneByKey(key:string){
+  return this.db.list(this.dbPath,ref=>ref.orderByKey().equalTo(key))
+
+  }
 }
