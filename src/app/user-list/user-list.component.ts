@@ -4,6 +4,8 @@ import {map} from "rxjs";
 import firebase from "firebase/compat";
 import {AccessLevelsService} from "../../services/access-levels.service";
 import {MatSelectChange} from "@angular/material/select";
+import {MatDialog} from "@angular/material/dialog";
+import {ManageUsersComponent} from "./manage-users/manage-users.component";
 
 @Component({
   selector: 'app-user-list',
@@ -11,15 +13,17 @@ import {MatSelectChange} from "@angular/material/select";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  dataSource: any[];
-  displayedColumns: string[] = ['name', 'email', 'role'];
+  dataSource = []
+  displayedColumns: string[] = ['name', 'email', 'role', 'activity'];
   name: string = ''
   editMode = false
   editKey: string = ''
   accessLevels: any[]
   term = ''
+  loader = false
 
   constructor(private dataBaseService: DataBaseService,
+              public dialog: MatDialog,
               private accessLevelService: AccessLevelsService) {
   }
 
@@ -29,6 +33,7 @@ export class UserListComponent implements OnInit {
   }
 
   getUsersList() {
+    this.loader=true
     this.dataBaseService.getUsersList().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -37,6 +42,7 @@ export class UserListComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataSource = data
+      this.loader=false
       console.log('users', data)
     });
   }
@@ -86,7 +92,7 @@ export class UserListComponent implements OnInit {
   }
 
   filterByRole(event: MatSelectChange) {
-    console.log(event.value)
+    this.loader=true
     this.dataBaseService.getUsersByRole(event.value).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -95,6 +101,7 @@ export class UserListComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataSource = data
+      this.loader=false
     });
   }
 
@@ -116,5 +123,10 @@ export class UserListComponent implements OnInit {
     console.log('event', event.value)
     console.log('element', element)
     this.dataBaseService.changeUsersRole(element.key, element)
+  }
+
+  openDialog() {
+    this.dialog.open(ManageUsersComponent)
+
   }
 }

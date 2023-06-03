@@ -47,4 +47,8 @@ export class DataBaseService {
     return this.userRef.update(key, value);
   }
 
+  getDisabledEnabledList(isDisabled){
+    return this.db.list(this.dbPath, ref => ref.orderByChild('isDisabled').equalTo(isDisabled))
+  }
+
 }

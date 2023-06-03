@@ -1,87 +1,75 @@
-<!--<div style="display: flex;justify-content: space-around;margin: 30px">-->
-<!--  <div>-->
-<!--    <label>name</label>-->
-<!--    <input [(ngModel)]="name">-->
-<!--  </div>-->
-<!--  <app-file-upload></app-file-upload>-->
-<!--  <button (click)="addUserToFireBase()" style="margin-left: 20px">-->
-<!--    <span *ngIf="!editMode">  add user to fire base   </span>-->
-<!--    <span *ngIf="editMode"> update user  </span>-->
-<!--  </button>-->
-<!--</div>-->
 
-<button mat-raised-button color="primary" class="btn-block" style="margin: 80px" [routerLink]="'/access-levels'">Access
-  Levels
-</button>
-<div style="display: flex;justify-content: center;margin-bottom: 20px">
-  <div style="display: flex;justify-content: space-between;width: 80%">
-    <div style="display: flex;justify-content: start">
-      <mat-select placeholder="User Role" (selectionChange)="filterByRole($event)"
-                  class="form-select" aria-label="Default select example"
-                  style="border-color: lightgrey;margin-right: 20px">
-        <mat-option *ngFor="let item of accessLevels" [value]="item.id">{{item.title}}</mat-option>
-      </mat-select>
-      <input class="form-select" placeholder="Search" (keyup)="filterByName($event)" [(ngModel)]="term">
-
-    </div>
-
-    <div style="display: flex;justify-content: end">
-      <button mat-raised-button color="primary" class="btn-block">Manage Users</button>
-    </div>
-  </div>
-</div>
-
-<div style="display: flex;justify-content: center">
-
-
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 80%!important">
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No.</th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Display Name</th>
-      <td mat-cell *matCellDef="let element"> {{element.displayName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef>Role</th>
-      <td mat-cell *matCellDef="let element">
-        <mat-select placeholder="User Role" [(ngModel)]="element.accessLevel"
-                    (selectionChange)="changeUsersRole($event,element)"
-                    class="form-select2" aria-label="Default select example" style="border-color: lightgrey">
+ <button mat-raised-button color="primary" class="btn-block" style="margin: 80px" [routerLink]="'/access-levels'">Access
+    Levels
+  </button>
+  <div style="display: flex;justify-content: center;margin-bottom: 20px">
+    <div style="display: flex;justify-content: space-between;width: 80%">
+      <div style="display: flex;justify-content: start">
+        <mat-select placeholder="User Role" (selectionChange)="filterByRole($event)"
+                    class="form-select" aria-label="Default select example"
+                    style="border-color: lightgrey;margin-right: 20px">
           <mat-option *ngFor="let item of accessLevels" [value]="item.id">{{item.title}}</mat-option>
         </mat-select>
-      </td>
-    </ng-container>
+        <input class="form-select" placeholder="Search" (keyup)="filterByName($event)" [(ngModel)]="term">
 
-    <!-- <ng-container matColumnDef="delete">-->
-    <!--    <th mat-header-cell *matHeaderCellDef> delete user  </th>-->
-    <!--    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">delete</td>-->
-    <!--  </ng-container>-->
-    <!-- <ng-container matColumnDef="edit">-->
-    <!--    <th mat-header-cell *matHeaderCellDef> edit user  </th>-->
-    <!--    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">edit</td>-->
-    <!--  </ng-container>-->
+      </div>
 
-    <!-- <ng-container matColumnDef="image">-->
-    <!--    <th mat-header-cell *matHeaderCellDef>user image </th>-->
-    <!--    <td mat-cell *matCellDef="let element" (click)="deleteUser(element)" style="cursor: pointer">-->
-
-    <!--    </td>-->
-    <!--  </ng-container>-->
-
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <div style="display: flex;justify-content: end">
+        <button mat-raised-button color="primary" class="btn-block" (click)="openDialog()">Manage Users</button>
+      </div>
+    </div>
+  </div>
+<div *ngIf="loader" style="display: flex;justify-content: center;margin-top: 50px">
+  <mat-spinner></mat-spinner>
 </div>
+
+  <div style="display: flex;justify-content: center" *ngIf="!loader">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 80%!important" *ngIf="dataSource.length>0">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No.</th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Display Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.displayName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-select placeholder="User Role" [(ngModel)]="element.accessLevel"
+                      (selectionChange)="changeUsersRole($event,element)"
+                      class="form-select2" aria-label="Default select example" style="border-color: lightgrey">
+            <mat-option *ngFor="let item of accessLevels" [value]="item.id">{{item.title}}</mat-option>
+          </mat-select>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="activity">
+        <th mat-header-cell *matHeaderCellDef>User Activity</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.isDisabled===false" style="color: darkgreen">face</mat-icon>
+          <mat-icon *ngIf="element.isDisabled===true" style="color: darkred">face</mat-icon>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div *ngIf="dataSource.length==0">
+    <h3>
+      there isn't any data !
+    </h3>
+    </div>
+  </div>
+
 
 
 

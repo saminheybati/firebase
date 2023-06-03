@@ -29,6 +29,9 @@ import {AccessLevelsComponent} from "./access-levels/access-levels.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
+import { ManageUsersComponent } from './user-list/manage-users/manage-users.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -48,30 +51,33 @@ const fireBaseConfig = {
     UserListComponent,
     FileUploadComponent,
     CustomizedDialogComponent,
-    AccessLevelsComponent
+    AccessLevelsComponent,
+    ManageUsersComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        AngularFireDatabaseModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatProgressBarModule,
-        AngularFireModule.initializeApp(fireBaseConfig),
-        provideFirestore(() => getFirestore()),
-        BrowserAnimationsModule,
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        AngularFireStorageModule,
-        FormsModule,
-        MatButtonModule,
-        MatTableModule,
-        MatDialogModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatSelectModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AngularFireDatabaseModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressBarModule,
+    AngularFireModule.initializeApp(fireBaseConfig),
+    provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    FormsModule,
+    MatButtonModule,
+    MatTableModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatProgressSpinnerModule
+  ],
   providers: [DataBaseService,
     { provide: FIREBASE_OPTIONS, useValue: fireBaseConfig }
   ],
