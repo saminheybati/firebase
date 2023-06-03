@@ -28,6 +28,7 @@ import { CustomizedDialogComponent } from './sign-in/customized-dialog/customize
 import {AccessLevelsComponent} from "./access-levels/access-levels.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSelectModule} from "@angular/material/select";
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -51,7 +52,7 @@ const fireBaseConfig = {
   ],
     imports: [
         BrowserModule,
-      AppRoutingModule,
+        AppRoutingModule,
         AngularFireDatabaseModule,
         MatCardModule,
         MatFormFieldModule,
@@ -68,7 +69,8 @@ const fireBaseConfig = {
         MatTableModule,
         MatDialogModule,
         MatCheckboxModule,
-        MatIconModule
+        MatIconModule,
+        MatSelectModule
     ],
   providers: [DataBaseService,
     { provide: FIREBASE_OPTIONS, useValue: fireBaseConfig }

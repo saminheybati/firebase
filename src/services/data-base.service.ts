@@ -12,14 +12,14 @@ export class DataBaseService {
   userRef: AngularFireList<User>
 
   constructor(private db: AngularFireDatabase) {
-    this.userRef=this.db.list(this.dbPath)
+    this.userRef = this.db.list(this.dbPath)
   }
 
-  getUsersList(){
+  getUsersList() {
     return this.userRef
   }
 
-  addUser(user:any){
+  addUser(user: any) {
     return this.userRef?.push(user)
   }
 
@@ -30,7 +30,21 @@ export class DataBaseService {
   updateUser(key: string, value: any): Promise<void> {
     return this.userRef.update(key, value);
   }
-   deleteAll(): Promise<void> {
+
+  deleteAll(): Promise<void> {
     return this.userRef.remove();
   }
+
+  getUsersByRole(roleId) {
+    return this.db.list(this.dbPath, ref => ref.orderByChild('accessLevel').equalTo(roleId))
+  }
+
+  filterByName(term) {
+    return this.db.list(this.dbPath, ref => ref.orderByChild('displayName').equalTo(term))
+  }
+
+  changeUsersRole(key, value) {
+    return this.userRef.update(key, value);
+  }
+
 }

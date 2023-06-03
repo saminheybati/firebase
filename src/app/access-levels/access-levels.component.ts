@@ -57,7 +57,7 @@ export class AccessLevelsComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataSource = data
-      console.log(this.dataSource)
+      console.log('acc lvl',this.dataSource)
     });
   }
 
@@ -78,5 +78,12 @@ export class AccessLevelsComponent implements OnInit {
   updateTitle() {
     console.log(this.selectedForEdit)
     this.accessLevelService.updateItem(this.selectedForEdit.key,this.selectedForEdit)
+  }
+
+  changeCheckbox(element, $event: MouseEvent) {
+    console.log(element)
+    console.log('event',$event)
+      this.accessLevelService.updateItem(element.key,element)
+
   }
 }
