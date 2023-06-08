@@ -40,7 +40,16 @@ export class DataBaseService {
   }
 
   filterByName(term) {
-    return this.db.list(this.dbPath, ref => ref.orderByChild('displayName').equalTo(term))
+    // return this.db.list(this.dbPath, ref => ref.orderByChild('displayName').endAt(term))
+    const query = this.db.list(this.dbPath, (ref) => {
+      let queryRef = ref.orderByKey();
+      if (term) {
+        queryRef = queryRef.endAt(term);
+      }
+      return queryRef
+    });
+
+    return query.valueChanges();
   }
 
   changeUsersRole(key, value) {

@@ -107,15 +107,19 @@ export class UserListComponent implements OnInit {
 
   filterByName(event: KeyboardEvent) {
     console.log(this.term)
-    this.dataBaseService.filterByName(this.term).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          (c.payload.val())
-        )
-      )
-    ).subscribe(data => {
-      console.log('data : filter by name ', data)
-    });
+    this.dataBaseService.filterByName(this.term).subscribe(res=>{
+      console.log("res?==",res)
+    })
+    // .snapshotChanges().pipe(
+    //   map(changes =>
+    //     changes.map(c =>
+    //       (c.payload.val())
+    //     )
+    //   )
+    // ).subscribe(data => {
+    //   console.log('data : filter by name ', data)
+    //   this.dataSource = data
+    // });
   }
 
 
