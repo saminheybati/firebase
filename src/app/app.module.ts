@@ -32,6 +32,12 @@ import {MatSelectModule} from "@angular/material/select";
 import { ManageUsersComponent } from './user-list/manage-users/manage-users.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import { PanelComponent } from './panel/panel.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatMenuModule} from "@angular/material/menu";
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -52,7 +58,8 @@ const fireBaseConfig = {
     FileUploadComponent,
     CustomizedDialogComponent,
     AccessLevelsComponent,
-    ManageUsersComponent
+    ManageUsersComponent,
+    PanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +83,12 @@ const fireBaseConfig = {
     MatIconModule,
     MatSelectModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatExpansionModule,
+    MatMenuModule
   ],
   providers: [DataBaseService,
     { provide: FIREBASE_OPTIONS, useValue: fireBaseConfig }

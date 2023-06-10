@@ -88,6 +88,7 @@ export class UserListComponent implements OnInit {
     ).subscribe(data => {
       console.log('access levels', data)
       this.accessLevels = data
+
     });
   }
 
