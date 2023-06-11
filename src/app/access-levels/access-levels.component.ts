@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AccessLvlModel} from "../../model/accessLvlModel";
 import {AccessLevelsService} from "../../services/access-levels.service";
 import {map} from "rxjs";
+import {A} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'app-access-levels',
@@ -11,12 +12,14 @@ import {map} from "rxjs";
 export class AccessLevelsComponent implements OnInit {
   dataSource: AccessLvlModel[];
   displayedColumns: string[] = ['Role Title', 'Capture', 'Setting', 'Template Builder', 'Template Capture', 'Manage Users', 'Edit User Models', 'All Spins', 'Access Levels'];
+  selectedElements = []
+  loader = true
 
   ngOnInit(): void {
     this.getAccLvlsList()
   }
 
-  selectedForEdit:any
+  selectedForEdit: any
 
   constructor(private accessLevelService: AccessLevelsService,) {
     let accLvl = {
@@ -56,8 +59,9 @@ export class AccessLevelsComponent implements OnInit {
         )
       )
     ).subscribe(data => {
+      this.loader = false
       this.dataSource = data
-      console.log('acc lvl',this.dataSource)
+      console.log('acc lvl', this.dataSource)
     });
   }
 
@@ -70,20 +74,34 @@ export class AccessLevelsComponent implements OnInit {
       )
     ).subscribe(data => {
       console.log("data", data[0])
-      this.selectedForEdit=data[0]
+      this.selectedForEdit = data[0]
     });
     // this.accessLevelService.updateItem(element.key,element)
   }
 
   updateTitle() {
     console.log(this.selectedForEdit)
-    this.accessLevelService.updateItem(this.selectedForEdit.key,this.selectedForEdit)
+    this.accessLevelService.updateItem(this.selectedForEdit.key, this.selectedForEdit)
   }
 
   changeCheckbox(element, $event: MouseEvent) {
-    console.log(element)
-    console.log('event',$event)
-      this.accessLevelService.updateItem(element.key,element)
+    // this.accessLevelService.updateItem(element.key,element)
+    this.selectedElements.push(element)
+    console.log("selected", this.selectedElements)
+
+  }
+
+  getSaveData(event: boolean) {
+    console.log('event', event)
+    if (event){
+      for (let item of this.selectedElements){
+        this.accessLevelService.updateItem(item.key,item)
+      }
+    }
+    else {
+      this.selectedElements=[]
+      this.getAccLvlsList()
+    }
 
   }
 }

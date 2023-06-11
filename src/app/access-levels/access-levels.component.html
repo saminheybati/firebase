@@ -1,10 +1,12 @@
 
-<button mat-raised-button  color="primary" class="btn-block" style="margin: 80px" [routerLink]="'/users'">Users List</button>
 <div *ngIf="selectedForEdit" style="display: flex;justify-content: center">
   <input [(ngModel)]="selectedForEdit.title">
   <button (click)="updateTitle()">change title</button>
 </div>
-<div style="display: flex;justify-content: center;margin-top: 10px">
+<div *ngIf="loader" style="display: flex;justify-content: center;margin-top: 50px">
+  <mat-spinner></mat-spinner>
+</div>
+<div style="display: flex;justify-content: center;margin-top: 10px" *ngIf="!loader" >
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 80%!important;margin-top: 10px">
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No.</th>
@@ -79,4 +81,11 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
 </div>
+<div style="display: flex;justify-content: center" *ngIf="!loader">
+<div style="width: 80%">
+  <app-savebar (save)="getSaveData($event)"></app-savebar>
+</div>
+</div>
+

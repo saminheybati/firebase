@@ -14,6 +14,7 @@ import {ManageUsersComponent} from "./manage-users/manage-users.component";
 })
 export class UserListComponent implements OnInit {
   dataSource = []
+  allData = []
   displayedColumns: string[] = ['name', 'email', 'role', 'activity'];
   name: string = ''
   editMode = false
@@ -33,7 +34,7 @@ export class UserListComponent implements OnInit {
   }
 
   getUsersList() {
-    this.loader=true
+    this.loader = true
     this.dataBaseService.getUsersList().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -42,7 +43,9 @@ export class UserListComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataSource = data
-      this.loader=false
+      this.allData = data
+
+      this.loader = false
       console.log('users', data)
     });
   }
@@ -93,7 +96,7 @@ export class UserListComponent implements OnInit {
   }
 
   filterByRole(event: MatSelectChange) {
-    this.loader=true
+    this.loader = true
     this.dataBaseService.getUsersByRole(event.value).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -102,25 +105,15 @@ export class UserListComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataSource = data
-      this.loader=false
+      this.allData = data
+      this.loader = false
     });
   }
 
   filterByName(event: KeyboardEvent) {
     console.log(this.term)
-    this.dataBaseService.filterByName(this.term).subscribe(res=>{
-      console.log("res?==",res)
-    })
-    // .snapshotChanges().pipe(
-    //   map(changes =>
-    //     changes.map(c =>
-    //       (c.payload.val())
-    //     )
-    //   )
-    // ).subscribe(data => {
-    //   console.log('data : filter by name ', data)
-    //   this.dataSource = data
-    // });
+    console.log("aall data",this.allData)
+    this.dataSource=this.allData.filter(x=>x.displayName.toLowerCase().includes(this.term.toLowerCase()))
   }
 
 
@@ -134,4 +127,17 @@ export class UserListComponent implements OnInit {
     this.dialog.open(ManageUsersComponent)
 
   }
+
+  // getSaveData(event: boolean) {
+  //    if (event){
+  //     for (let item of this.selectedElements){
+  //       this.accessLevelService.updateItem(item.key,item)
+  //     }
+  //   }
+  //   else {
+  //     this.selectedElements=[]
+  //     this.getAccLvlsList()
+  //   }
+  //
+  // }
 }

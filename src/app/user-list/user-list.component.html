@@ -1,8 +1,5 @@
 
- <button mat-raised-button color="primary" class="btn-block" style="margin: 80px" [routerLink]="'/access-levels'">Access
-    Levels
-  </button>
-  <div style="display: flex;justify-content: center;margin-bottom: 20px">
+  <div style="display: flex;justify-content: center;margin-bottom: 20px;margin-top: 80px">
     <div style="display: flex;justify-content: space-between;width: 80%">
       <div style="display: flex;justify-content: start">
         <mat-select placeholder="User Role" (selectionChange)="filterByRole($event)"
@@ -71,6 +68,10 @@
   </div>
 
 
-
+<!-- <div style="display: flex;justify-content: center" *ngIf="!loader">-->
+<!--   <div style="width: 80%">-->
+<!--     <app-savebar (save)="getSaveData($event)"></app-savebar>-->
+<!--   </div>-->
+<!-- </div>-->
 
 

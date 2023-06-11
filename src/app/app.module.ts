@@ -38,6 +38,7 @@ import {MatListModule} from "@angular/material/list";
 import { PanelComponent } from './panel/panel.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatMenuModule} from "@angular/material/menu";
+import { SavebarComponent } from './savebar/savebar.component';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -60,6 +61,7 @@ const fireBaseConfig = {
     AccessLevelsComponent,
     ManageUsersComponent,
     PanelComponent,
+    SavebarComponent,
   ],
   imports: [
     BrowserModule,

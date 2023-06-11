@@ -5,10 +5,7 @@ import {UserListComponent} from "../../user-list/user-list.component";
 import {AccessLevelsComponent} from "../../access-levels/access-levels.component";
 
 const routes: Routes = [
-  {
-  path: '',
-  component: PanelComponent,
-},
+
   {
   path: 'users',
   component: UserListComponent,
