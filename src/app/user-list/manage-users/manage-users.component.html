@@ -2,7 +2,11 @@
   <mat-tab-group (selectedIndexChange)="selectionChange($event)">
     <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
       <div style="display: flex;justify-content: center">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%!important">
+        <div *ngIf="loader" style="display: flex;justify-content: center;margin-top: 50px">
+          <mat-spinner></mat-spinner>
+        </div>
+
+        <table mat-table [dataSource]="newDataSource" class="mat-elevation-z8" style="width: 80%!important">
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef>
               <input class="form-select" placeholder="Search Users" [(ngModel)]="term" (keyup)="filterData($event)">
@@ -15,6 +19,9 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+      </div>
+      <div style="display: flex;justify-content: center;margin-top: 20px">
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
       </div>
 

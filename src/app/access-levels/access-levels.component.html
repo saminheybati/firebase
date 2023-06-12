@@ -1,9 +1,7 @@
-
-
 <div *ngIf="loader" style="display: flex;justify-content: center;margin-top: 50px">
   <mat-spinner></mat-spinner>
 </div>
-<div style="display: flex;justify-content: center;margin-top: 10px" *ngIf="!loader" >
+<div style="display: flex;justify-content: center;margin-top: 10px" *ngIf="!loader">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 80%!important;margin-top: 10px">
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No.</th>
@@ -13,35 +11,42 @@
     <ng-container matColumnDef="Role Title">
       <th mat-header-cell *matHeaderCellDef> Role Title</th>
       <td mat-cell *matCellDef="let element"> {{element.title}}
-      <mat-icon style="margin-left: 10px;cursor: pointer;font-size: large" (click)="getItem(element)">edit</mat-icon>
+        <button mat-icon-button [disabled]="disable">
+          <mat-icon style="margin-left: 10px;cursor: pointer;font-size: large" (click)="getItem(element)">edit
+          </mat-icon>
+        </button>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Capture">
       <th mat-header-cell *matHeaderCellDef> Capture</th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.isCapture"  (ngModelChange)="changeCheckbox(element,$event)" [disabled]="element.title==='Admin' || element.title==='Default'"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.isCapture" (ngModelChange)="changeCheckbox(element,$event)"
+                      [disabled]="element.title==='Admin' || element.title==='Default'"></mat-checkbox>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Setting">
       <th mat-header-cell *matHeaderCellDef> Setting</th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.isSetting" (ngModelChange)="changeCheckbox(element,$event)" [disabled]="element.title==='Admin'"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.isSetting" (ngModelChange)="changeCheckbox(element,$event)"
+                      [disabled]="element.title==='Admin'"></mat-checkbox>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Template Builder">
       <th mat-header-cell *matHeaderCellDef> Template Builder</th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.isTemplateBuilder" (ngModelChange)="changeCheckbox(element,$event)" [disabled]="element.title==='Admin'"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.isTemplateBuilder" (ngModelChange)="changeCheckbox(element,$event)"
+                      [disabled]="element.title==='Admin'"></mat-checkbox>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Template Capture">
       <th mat-header-cell *matHeaderCellDef> Template Capture</th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.isTemplateCapture" (ngModelChange)="changeCheckbox(element,$event)" [disabled]="element.title==='Admin'"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.isTemplateCapture" (ngModelChange)="changeCheckbox(element,$event)"
+                      [disabled]="element.title==='Admin'"></mat-checkbox>
       </td>
     </ng-container>
 
@@ -49,28 +54,32 @@
     <ng-container matColumnDef="Manage Users">
       <th mat-header-cell *matHeaderCellDef> Manage Users</th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.isUsers" (ngModelChange)="changeCheckbox(element,$event)" [disabled]="element.title==='Admin'"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.isUsers" (ngModelChange)="changeCheckbox(element,$event)"
+                      [disabled]="element.title==='Admin'"></mat-checkbox>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Edit User Models">
       <th mat-header-cell *matHeaderCellDef> Edit User Models</th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.isUserModels" (ngModelChange)="changeCheckbox(element,$event)" [disabled]="element.title==='Admin'"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.isUserModels" (ngModelChange)="changeCheckbox(element,$event)"
+                      [disabled]="element.title==='Admin'"></mat-checkbox>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="All Spins">
       <th mat-header-cell *matHeaderCellDef> All Spins</th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.isAllSpins" (ngModelChange)="changeCheckbox(element,$event)" [disabled]="element.title==='Admin'"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.isAllSpins" (ngModelChange)="changeCheckbox(element,$event)"
+                      [disabled]="element.title==='Admin'"></mat-checkbox>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Access Levels">
       <th mat-header-cell *matHeaderCellDef> Access Levels</th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.isAccessLevels"  (ngModelChange)="changeCheckbox(element,$event)" [disabled]="element.title==='Admin'"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.isAccessLevels" (ngModelChange)="changeCheckbox(element,$event)"
+                      [disabled]="element.title==='Admin'"></mat-checkbox>
       </td>
     </ng-container>
 
@@ -81,8 +90,8 @@
 
 </div>
 <div style="display: flex;justify-content: center" *ngIf="!loader">
-<div style="width: 80%">
-  <app-savebar (save)="getSaveData($event)"></app-savebar>
-</div>
+  <div style="width: 80%">
+    <app-savebar (save)="getSaveData($event)"></app-savebar>
+  </div>
 </div>
 

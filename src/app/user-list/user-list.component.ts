@@ -121,10 +121,16 @@ export class UserListComponent implements OnInit ,AfterViewInit{
     });
   }
 
-  filterByName(event: KeyboardEvent) {
-    console.log(this.term)
-    console.log("aall data", this.allData)
-    this.dataSource = this.allData.filter(x => x.displayName.toLowerCase().includes(this.term.toLowerCase()))
+  filterByName(event: any) {
+    // console.log(this.term)
+    // console.log("aall data", this.allData)
+    // this.dataSource = this.allData.filter(x => x.displayName.toLowerCase().includes(this.term.toLowerCase()))
+    // const filterValue = (event.target as HTMLInputElement).value;
+
+    this.newDataSource.filter = this.term.trim().toLowerCase();
+    if (this.newDataSource.paginator) {
+      this.newDataSource.paginator.firstPage();
+    }
   }
 
 

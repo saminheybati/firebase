@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataBaseService} from "../../../services/data-base.service";
 import {map} from "rxjs";
 import {MatDialogRef} from "@angular/material/dialog";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+import loader from "@angular-devkit/build-angular/src/webpack/plugins/single-test-transform";
 
 @Component({
   selector: 'app-manage-users',
@@ -16,6 +19,10 @@ export class ManageUsersComponent implements OnInit {
   tabs = ['Delete Users', 'Enable Users', 'Disable Users'];
   buttonText = this.tabs[0]
   term = ''
+  totalElements = 0
+  loader = false
+  newDataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private dataBaseService: DataBaseService,
               private dialogRef: MatDialogRef<ManageUsersComponent>) {
@@ -27,6 +34,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
   getUsersList() {
+    this.loader=true
     this.dataBaseService.getUsersList().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -35,7 +43,13 @@ export class ManageUsersComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataSource = data
-      this.allData=data
+      this.allData = data
+
+      this.newDataSource = new MatTableDataSource(this.allData);
+      this.newDataSource.paginator = this.paginator;
+      this.loader=false
+      this.totalElements = this.dataSource.length
+      console.log('users', data)
     });
   }
 
@@ -91,7 +105,10 @@ export class ManageUsersComponent implements OnInit {
   }
 
   filterData($event: KeyboardEvent) {
-    this.dataSource=this.allData.filter(x=>x.displayName.toLowerCase().includes(this.term.toLowerCase()))
-    // this.dataSource=this.allData.filter(x=>x.email.toLowerCase().includes(this.term.toLowerCase()))
+    console.log("term",this.term)
+    this.newDataSource.filter = this.term.trim().toLowerCase();
+    if (this.newDataSource.paginator) {
+      this.newDataSource.paginator.firstPage();
+    }
   }
 }

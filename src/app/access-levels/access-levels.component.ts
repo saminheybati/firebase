@@ -16,6 +16,7 @@ export class AccessLevelsComponent implements OnInit {
   displayedColumns: string[] = ['Role Title', 'Capture', 'Setting', 'Template Builder', 'Template Capture', 'Manage Users', 'Edit User Models', 'All Spins', 'Access Levels'];
   selectedElements = []
   loader = true
+  disable = false
 
   ngOnInit(): void {
     this.getAccLvlsList()
@@ -69,6 +70,7 @@ export class AccessLevelsComponent implements OnInit {
   }
 
   getItem(element) {
+    this.disable=true
     this.accessLevelService.getOneByKey(element.key).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -76,15 +78,12 @@ export class AccessLevelsComponent implements OnInit {
         )
       )
     ).subscribe(data => {
-      console.log("data", data[0])
       this.selectedForEdit = data[0]
       this.dialog.open(AccessLevelTitleComponent, {
-        data:this.selectedForEdit
+        data: this.selectedForEdit
       });
+      this.disable=false
     });
-
-
-
     // this.accessLevelService.updateItem(element.key,element)
   }
 

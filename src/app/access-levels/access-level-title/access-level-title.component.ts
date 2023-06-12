@@ -26,5 +26,6 @@ export class AccessLevelTitleComponent implements OnInit {
   saveChanges() {
     this.selectedAccLvl.title=this.title
     this.accessLevelService.updateItem(this.selectedAccLvl.key, this.selectedAccLvl)
+      // this.dialogRef.close();
   }
 }
