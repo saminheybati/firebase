@@ -10,17 +10,19 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class ManageUsersComponent implements OnInit {
   dataSource: any[];
+  allData: any[];
   displayedColumns: string[] = ['email'];
   selectedUsers = []
   tabs = ['Delete Users', 'Enable Users', 'Disable Users'];
   buttonText = this.tabs[0]
+  term = ''
 
   constructor(private dataBaseService: DataBaseService,
-              private dialogRef: MatDialogRef<ManageUsersComponent >) {
+              private dialogRef: MatDialogRef<ManageUsersComponent>) {
   }
 
   ngOnInit(): void {
-    this.selectedUsers=[]
+    this.selectedUsers = []
     this.getUsersList()
   }
 
@@ -33,6 +35,7 @@ export class ManageUsersComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataSource = data
+      this.allData=data
     });
   }
 
@@ -49,7 +52,7 @@ export class ManageUsersComponent implements OnInit {
 
   selectionChange(event: number) {
     this.buttonText = this.tabs[event]
-    this.selectedUsers=[]
+    this.selectedUsers = []
     if (this.buttonText === 'Delete Users') {
       this.getUsersList()
     } else if (this.buttonText === 'Enable Users') {
@@ -61,15 +64,15 @@ export class ManageUsersComponent implements OnInit {
 
   action() {
     for (let user of this.selectedUsers) {
-      user.isSelected=false
+      user.isSelected = false
       if (this.buttonText === 'Delete Users') {
         this.dataBaseService.deleteUser(user.key)
       } else if (this.buttonText === 'Enable Users') {
-        user.isDisabled=false
-        this.dataBaseService.updateUser(user.key,user)
+        user.isDisabled = false
+        this.dataBaseService.updateUser(user.key, user)
       } else if (this.buttonText === 'Disable Users') {
-        user.isDisabled=true
-        this.dataBaseService.updateUser(user.key,user)
+        user.isDisabled = true
+        this.dataBaseService.updateUser(user.key, user)
       }
       this.dialogRef.close();
     }
@@ -87,4 +90,8 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
+  filterData($event: KeyboardEvent) {
+    this.dataSource=this.allData.filter(x=>x.displayName.toLowerCase().includes(this.term.toLowerCase()))
+    // this.dataSource=this.allData.filter(x=>x.email.toLowerCase().includes(this.term.toLowerCase()))
+  }
 }

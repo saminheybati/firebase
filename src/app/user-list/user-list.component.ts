@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DataBaseService} from "../../services/data-base.service";
 import {map} from "rxjs";
 import firebase from "firebase/compat";
@@ -6,13 +6,15 @@ import {AccessLevelsService} from "../../services/access-levels.service";
 import {MatSelectChange} from "@angular/material/select";
 import {MatDialog} from "@angular/material/dialog";
 import {ManageUsersComponent} from "./manage-users/manage-users.component";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit ,AfterViewInit{
   dataSource = []
   allData = []
   displayedColumns: string[] = ['name', 'email', 'role', 'activity'];
@@ -22,11 +24,16 @@ export class UserListComponent implements OnInit {
   accessLevels: any[]
   term = ''
   loader = false
-
+  totalElements = 0
+  newDataSource: MatTableDataSource<any>;
+ @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private dataBaseService: DataBaseService,
               public dialog: MatDialog,
               private accessLevelService: AccessLevelsService) {
   }
+
+  ngAfterViewInit(): void {
+    }
 
   ngOnInit(): void {
     this.getUsersList()
@@ -45,6 +52,10 @@ export class UserListComponent implements OnInit {
       this.dataSource = data
       this.allData = data
 
+      this.newDataSource = new MatTableDataSource(this.allData);
+      this.newDataSource.paginator = this.paginator;
+
+      this.totalElements = this.dataSource.length
       this.loader = false
       console.log('users', data)
     });
@@ -112,8 +123,8 @@ export class UserListComponent implements OnInit {
 
   filterByName(event: KeyboardEvent) {
     console.log(this.term)
-    console.log("aall data",this.allData)
-    this.dataSource=this.allData.filter(x=>x.displayName.toLowerCase().includes(this.term.toLowerCase()))
+    console.log("aall data", this.allData)
+    this.dataSource = this.allData.filter(x => x.displayName.toLowerCase().includes(this.term.toLowerCase()))
   }
 
 
@@ -140,4 +151,7 @@ export class UserListComponent implements OnInit {
   //   }
   //
   // }
+  pagination($event: Event) {
+    console.log("event",$event)
+  }
 }
