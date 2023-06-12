@@ -40,6 +40,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatMenuModule} from "@angular/material/menu";
 import { SavebarComponent } from './savebar/savebar.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { AccessLevelTitleComponent } from './access-levels/access-level-title/access-level-title.component';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -63,6 +64,7 @@ const fireBaseConfig = {
     ManageUsersComponent,
     PanelComponent,
     SavebarComponent,
+    AccessLevelTitleComponent,
   ],
   imports: [
     BrowserModule,

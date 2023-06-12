@@ -3,6 +3,8 @@ import {AccessLvlModel} from "../../model/accessLvlModel";
 import {AccessLevelsService} from "../../services/access-levels.service";
 import {map} from "rxjs";
 import {A} from "@angular/cdk/keycodes";
+import {MatDialog} from "@angular/material/dialog";
+import {AccessLevelTitleComponent} from "./access-level-title/access-level-title.component";
 
 @Component({
   selector: 'app-access-levels',
@@ -21,7 +23,8 @@ export class AccessLevelsComponent implements OnInit {
 
   selectedForEdit: any
 
-  constructor(private accessLevelService: AccessLevelsService,) {
+  constructor(private accessLevelService: AccessLevelsService,
+              public dialog: MatDialog) {
     let accLvl = {
       id: "default",
       isAccessLevels: false,
@@ -75,7 +78,13 @@ export class AccessLevelsComponent implements OnInit {
     ).subscribe(data => {
       console.log("data", data[0])
       this.selectedForEdit = data[0]
+      this.dialog.open(AccessLevelTitleComponent, {
+        data:this.selectedForEdit
+      });
     });
+
+
+
     // this.accessLevelService.updateItem(element.key,element)
   }
 
@@ -93,13 +102,12 @@ export class AccessLevelsComponent implements OnInit {
 
   getSaveData(event: boolean) {
     console.log('event', event)
-    if (event){
-      for (let item of this.selectedElements){
-        this.accessLevelService.updateItem(item.key,item)
+    if (event) {
+      for (let item of this.selectedElements) {
+        this.accessLevelService.updateItem(item.key, item)
       }
-    }
-    else {
-      this.selectedElements=[]
+    } else {
+      this.selectedElements = []
       this.getAccLvlsList()
     }
 

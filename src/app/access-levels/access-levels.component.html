@@ -1,8 +1,5 @@
 
-<div *ngIf="selectedForEdit" style="display: flex;justify-content: center">
-  <input [(ngModel)]="selectedForEdit.title">
-  <button (click)="updateTitle()">change title</button>
-</div>
+
 <div *ngIf="loader" style="display: flex;justify-content: center;margin-top: 50px">
   <mat-spinner></mat-spinner>
 </div>
