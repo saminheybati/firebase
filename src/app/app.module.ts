@@ -41,6 +41,8 @@ import {MatMenuModule} from "@angular/material/menu";
 import { SavebarComponent } from './savebar/savebar.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { AccessLevelTitleComponent } from './access-levels/access-level-title/access-level-title.component';
+import { ProfileComponent } from './profile/profile.component';
+import {ImageCropperModule} from "ngx-image-cropper";
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -65,6 +67,7 @@ const fireBaseConfig = {
     PanelComponent,
     SavebarComponent,
     AccessLevelTitleComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ const fireBaseConfig = {
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    ImageCropperModule,
     AngularFireModule.initializeApp(fireBaseConfig),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
