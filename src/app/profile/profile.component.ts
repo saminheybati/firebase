@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ImageCroppedEvent, LoadedImage} from "ngx-image-cropper";
+import {MatDialog} from "@angular/material/dialog";
+import {AccessLevelTitleComponent} from "../access-levels/access-level-title/access-level-title.component";
+import {UploadImageComponent} from "./upload-image/upload-image.component";
 
 @Component({
   selector: 'app-profile',
@@ -9,27 +12,15 @@ import {ImageCroppedEvent, LoadedImage} from "ngx-image-cropper";
 export class ProfileComponent implements OnInit {
   displayName = 'samin'
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
   }
-  imageChangedEvent: any = '';
-    croppedImage: any = '';
 
-    fileChangeEvent(event: any): void {
-        this.imageChangedEvent = event;
-    }
-    imageCropped(event: ImageCroppedEvent) {
-        this.croppedImage = event.base64;
-    }
-    imageLoaded(image: LoadedImage) {
-        // show cropper
-    }
-    cropperReady() {
-        // cropper ready
-    }
-    loadImageFailed() {
-        // show message
-    }
+  openUploadDialog() {
+    this.dialog.open(UploadImageComponent, {
+      data: 'sam'
+    });
+  }
 }

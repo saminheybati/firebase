@@ -43,6 +43,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { AccessLevelTitleComponent } from './access-levels/access-level-title/access-level-title.component';
 import { ProfileComponent } from './profile/profile.component';
 import {ImageCropperModule} from "ngx-image-cropper";
+import { UploadImageComponent } from './profile/upload-image/upload-image.component';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -68,6 +69,7 @@ const fireBaseConfig = {
     SavebarComponent,
     AccessLevelTitleComponent,
     ProfileComponent,
+    UploadImageComponent,
   ],
   imports: [
     BrowserModule,
