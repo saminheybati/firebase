@@ -39,22 +39,41 @@
         <mat-card-title>General Setting</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-      <img src="assets"/>
+        <div style="display: flex;align-items: center">
+          <img src="/assets/download.jpeg" style="width: 150px;height: 150px;border-radius: 100%"/>
+          <button mat-raised-button color="primary" style="margin-left: 80px">Upload</button>
+        </div>
+        <div style="margin-top: 50px;display: flex;justify-content: space-between">
+          <mat-form-field appearance="outline" style="width: 100%;margin-right: 10px">
+            <mat-label>Dealership Display Name</mat-label>
+            <input class="form-select" matInput placeholder="Dealership Display Name" [(ngModel)]="displayName" >
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Sales Email</mat-label>
+            <input class="form-select" matInput placeholder="Sales Email" [(ngModel)]="displayName">
+          </mat-form-field>
+        </div>
 
-<!--        <input type="file" (change)="fileChangeEvent($event)"/>-->
+        <div style=";display: flex;justify-content: space-between">
+          <mat-form-field appearance="outline" style="width: 100%;margin-right: 10px">
+            <mat-label>Sales Phone Number</mat-label>
+            <input class="form-select" matInput placeholder="Dealership Display Name" [(ngModel)]="displayName" >
+          </mat-form-field>
+        </div>
+        <!--        <input type="file" (change)="fileChangeEvent($event)"/>-->
 
-<!--        <image-cropper-->
-<!--          [imageChangedEvent]="imageChangedEvent"-->
-<!--          [maintainAspectRatio]="true"-->
-<!--          [aspectRatio]="4 / 3"-->
-<!--          format="png"-->
-<!--          (imageCropped)="imageCropped($event)"-->
-<!--          (imageLoaded)="imageLoaded($event)"-->
-<!--          (cropperReady)="cropperReady()"-->
-<!--          (loadImageFailed)="loadImageFailed()"-->
-<!--        ></image-cropper>-->
+        <!--        <image-cropper-->
+        <!--          [imageChangedEvent]="imageChangedEvent"-->
+        <!--          [maintainAspectRatio]="true"-->
+        <!--          [aspectRatio]="4 / 3"-->
+        <!--          format="png"-->
+        <!--          (imageCropped)="imageCropped($event)"-->
+        <!--          (imageLoaded)="imageLoaded($event)"-->
+        <!--          (cropperReady)="cropperReady()"-->
+        <!--          (loadImageFailed)="loadImageFailed()"-->
+        <!--        ></image-cropper>-->
 
-<!--        <img [src]="croppedImage"/>-->
+        <!--        <img [src]="croppedImage"/>-->
 
       </mat-card-content>
     </mat-card>
