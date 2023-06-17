@@ -48,17 +48,22 @@ export class DataBaseService {
       }
       return queryRef
     });
-
-
     return query.valueChanges();
   }
 
   changeUsersRole(key, value) {
     return this.userRef.update(key, value);
   }
+  updateUsers(key, value) {
+    return this.userRef.update(key, value);
+  }
 
-  getDisabledEnabledList(isDisabled){
+  getDisabledEnabledList(isDisabled) {
     return this.db.list(this.dbPath, ref => ref.orderByChild('isDisabled').equalTo(isDisabled))
   }
 
+  getOneUserByKey(uid: any) {
+    return this.db.list(this.dbPath, ref => ref.orderByChild('id').equalTo(uid))
+
+  }
 }

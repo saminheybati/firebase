@@ -4,11 +4,11 @@
       <mat-card-actions style="margin-bottom: 5px">
         <div style="display: flex;justify-content: start ;align-items: center">
           <h4>Username:</h4>
-          <h3 style="margin-left: 20px"> sssssssssssss</h3>
+          <h3 style="margin-left: 20px"> {{loggedInUserData?.username}}</h3>
         </div>
         <div style="display: flex;justify-content: start ;align-items: center">
           <h4>Email:</h4>
-          <h3 style="margin-left: 20px"> samin@yahoo.com</h3>
+          <h3 style="margin-left: 20px"> {{loggedInUser?.email}}</h3>
         </div>
       </mat-card-actions>
     </mat-card>
@@ -34,43 +34,51 @@
 
 <div style="display: flex;justify-content: center;margin-top: 10px">
   <div style="display: flex;justify-content: start;margin-top: 10px;width: 50%">
-    <mat-card style="width: 100%">
-      <mat-card-header>
-        <mat-card-title>General Setting</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div style="display: flex;align-items: center">
-          <img src="/assets/download.jpeg" style="width: 150px;height: 150px;border-radius: 100%"/>
-          <button mat-raised-button color="primary" style="margin-left: 80px" (click)="openUploadDialog()">Upload</button>
-        </div>
-        <div style="margin-top: 50px;display: flex;justify-content: space-between">
-          <mat-form-field appearance="outline" style="width: 100%;margin-right: 10px">
-            <mat-label>Dealership Display Name</mat-label>
-            <input class="form-select" matInput placeholder="Dealership Display Name" [(ngModel)]="displayName" >
-          </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Sales Email</mat-label>
-            <input class="form-select" matInput placeholder="Sales Email" [(ngModel)]="displayName">
-          </mat-form-field>
-        </div>
+    <form [formGroup]="userDataForm">
+      <mat-card style="width: 100%">
+        <mat-card-header>
+          <mat-card-title>General Setting</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="display: flex;align-items: center">
+            <img src="/assets/download.jpeg" style="width: 150px;height: 150px;border-radius: 100%"/>
+            <button mat-raised-button color="primary" style="margin-left: 80px" (click)="openUploadDialog()">Upload
+            </button>
+          </div>
+          <div style="margin-top: 50px;display: flex;justify-content: space-between">
+            <mat-form-field appearance="outline" style="width: 100%;margin-right: 10px">
+              <mat-label>Dealership Display Name</mat-label>
+              <input class="form-select" matInput placeholder="Dealership Display Name" formControlName="dealershipDisplayName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Sales Email</mat-label>
+              <input class="form-select" matInput placeholder="Sales Email" formControlName="salesEmail">
+            </mat-form-field>
+          </div>
 
-        <div style=";display: flex;justify-content: space-between">
-          <mat-form-field appearance="outline" style="width: 100%;margin-right: 10px" >
-            <mat-label>Sales Phone Number</mat-label>
-            <input class="form-select" matInput placeholder="Dealership Display Name" [(ngModel)]="displayName" >
-            <mat-icon matSuffix style="cursor: pointer">edit</mat-icon>
-          </mat-form-field>
-        </div>
-        <div style=";display: flex;justify-content: space-between">
-          <mat-form-field appearance="outline" style="width: 80%;margin-right: 10px" >
-            <mat-label>Show Room Address</mat-label>
-            <input class="form-select" matInput placeholder="Dealership Display Name" [(ngModel)]="displayName" >
-          </mat-form-field>
-        </div>
+          <div style=";display: flex;justify-content: space-between">
+            <mat-form-field appearance="outline" style="width: 100%;margin-right: 10px">
+              <mat-label>Sales Phone Number</mat-label>
+              <input class="form-select" matInput placeholder="Dealership Display Name" formControlName="salesPhoneNumber">
+              <mat-icon matSuffix style="cursor: pointer">edit</mat-icon>
+            </mat-form-field>
+          </div>
+          <div style=";display: flex;justify-content: space-between">
+            <mat-form-field appearance="outline" style="width: 80%;margin-right: 10px">
+              <mat-label>Show Room Address</mat-label>
+              <input class="form-select" matInput placeholder="Dealership Display Name" formControlName="showRoomAddress">
+            </mat-form-field>
+          </div>
 
 
-      </mat-card-content>
-    </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </form>
 
+  </div>
+</div>
+<div style="display: flex;justify-content: center">
+  <div style="width: 50%">
+    <app-savebar  (save)="getSaveData($event)"></app-savebar>
   </div>
 </div>

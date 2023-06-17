@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
 
 @Component({
@@ -8,10 +8,12 @@ import {base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage
 })
 export class UploadImageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
   canvasRotation = 0;
@@ -25,10 +27,15 @@ export class UploadImageComponent implements OnInit {
     this.imageChangedEvent = event;
   }
 
-  imageCropped(event: ImageCroppedEvent) {
+  async imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
-    console.log(event, base64ToFile(event.base64));
+
+    console.log("croppedImage", this.croppedImage)
+    console.log("evvv", event)
+    // console.log(event, base64ToFile(event.base64));
   }
+
+
 
   imageLoaded() {
     this.showCropper = true;

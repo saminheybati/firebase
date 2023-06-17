@@ -20,6 +20,7 @@ export class AuthServiceService {
   getAllUsers(){
 
   }
+
   GoogleAuth() {
     return this.AuthLogin(new GoogleAuthProvider());
   }
@@ -36,6 +37,7 @@ export class AuthServiceService {
         // console.log(error);
       });
   }
+
 
 
 }

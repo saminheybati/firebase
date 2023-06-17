@@ -80,7 +80,12 @@ export class SignInComponent implements OnInit {
       signUpTimeStamp:'15445658888',
       displayName:'not created',
       isDisabled:false,
-      avatarFullPath:user.photoURL
+      avatarFullPath:user.photoURL,
+      dealershipDisplayName:'',
+      salesEmail:'',
+      salesPhoneNumber:'',
+      showRoomAddress:''
+
     }
     this.userService.addUser(userObject)
   }

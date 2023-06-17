@@ -12,4 +12,9 @@ isTermsAccepted:string
   displayName:string
   isDisabled:boolean
   avatarFullPath:string
+  dealershipDisplayName:string
+  salesEmail:string
+  salesPhoneNumber:string
+  showRoomAddress:string
+
 }

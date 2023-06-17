@@ -7,7 +7,7 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {DataBaseService} from "../services/data-base.service";
 import {getFirestore, provideFirestore} from "@angular/fire/firestore";
 import {AngularFireModule, FIREBASE_OPTIONS} from "@angular/fire/compat";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SignInComponent} from './sign-in/sign-in.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
@@ -80,6 +80,9 @@ const fireBaseConfig = {
     MatInputModule,
     MatProgressBarModule,
     ImageCropperModule,
+    BrowserModule ,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(fireBaseConfig),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
