@@ -1,31 +1,33 @@
-<label>
-  <input
-    type="file"
-    class="text-nowrap text-truncate"
-    (change)="selectFile($event)"
-  />
-</label>
 
-<button
-  class="btn btn-success btn-sm"
-  [disabled]="!selectedFiles"
-  (click)="upload()"
->
-  Upload
-</button>
 
-<div *ngIf="currentFileUpload" class="progress mt-2">
-  <div
-    class="progress-bar progress-bar-info"
-    role="progressbar"
-    attr.aria-valuenow="{{ percentage }}"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    [ngStyle]="{ width: percentage + '%' }"
-  >
-    {{ percentage }}%
-  </div>
-</div>
+<!--<label>-->
+<!--  <input-->
+<!--    type="file"-->
+<!--    class="text-nowrap text-truncate"-->
+<!--    (change)="selectFile($event)"-->
+<!--  />-->
+<!--</label>-->
+
+<!--<button-->
+<!--  class="btn btn-success btn-sm"-->
+<!--  [disabled]="!selectedFiles"-->
+<!--  (click)="upload()"-->
+<!--&gt;-->
+<!--  Upload-->
+<!--</button>-->
+
+<!--<div *ngIf="currentFileUpload" class="progress mt-2">-->
+<!--  <div-->
+<!--    class="progress-bar progress-bar-info"-->
+<!--    role="progressbar"-->
+<!--    attr.aria-valuenow="{{ percentage }}"-->
+<!--    aria-valuemin="0"-->
+<!--    aria-valuemax="100"-->
+<!--    [ngStyle]="{ width: percentage + '%' }"-->
+<!--  >-->
+<!--    {{ percentage }}%-->
+<!--  </div>-->
+<!--</div>-->
 
 
 <!--<div class="card" >-->
@@ -37,3 +39,64 @@
 
 <!--  </ul>-->
 <!--</div>-->
+<input type="file" (change)="fileChangeEvent($event)" accept="image/*" />
+<br />
+<br />
+<input [(ngModel)]="imageURL" placeholder="URL to load image" type="text" />
+<br />
+<br />
+<button (click)="rotateLeft()">Rotate left</button>
+<button (click)="rotateRight()">Rotate right</button>
+<button (click)="flipHorizontal()">Flip horizontal</button>
+<button (click)="flipVertical()">Flip vertical</button>
+<br />
+<br />
+<button (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button>
+<button (click)="toggleAspectRatio()">Aspect ratio: {{aspectRatio === 4/3 ? '4/3' : '16/5'}}</button>
+<button (click)="resetImage()">Reset image</button>
+<br />
+<br />
+<input [(ngModel)]="rotation" placeholder="Rotation" type="number" (ngModelChange)="updateRotation()" /> <button (click)="zoomOut()">Zoom -</button> <button (click)="zoomIn()">Zoom +</button>
+<br />
+<br/>
+<button (click)="moveLeft()">move left</button>
+<button (click)="moveRight()">move right</button>
+
+<button (click)="moveTop()">move top</button>
+<button (click)="moveBottom()">move bottom</button>
+<br/>
+<br/>
+<button (click)="allowMoveImage = !allowMoveImage;">{{allowMoveImage ? 'Disable' : 'Enable' }} image panning</button>
+<button (click)="hidden = !hidden;">{{hidden ? 'Show' : 'Hide' }}</button>
+<br/>
+
+
+<div class="cropper-wrapper">
+  <my-image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [imageURL]="imageURL"
+    [maintainAspectRatio]="true"
+    [containWithinAspectRatio]="containWithinAspectRatio"
+    [aspectRatio]="aspectRatio"
+    [cropperMinWidth]="128"
+    [onlyScaleDown]="true"
+    [roundCropper]="false"
+    [canvasRotation]="canvasRotation"
+    [(transform)]="transform"
+    [alignImage]="'center'"
+    [style.display]="showCropper ? null : 'none'"
+    [allowMoveImage]="allowMoveImage"
+    [hidden]="hidden"
+    imageAltText="Alternative image text"
+    backgroundColor="red"
+    output="blob"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady($event)"
+    (loadImageFailed)="loadImageFailed()"
+  ></my-image-cropper>
+  <div *ngIf="loading" class="loader">Loading...</div>
+</div>
+<img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+<!--<img [src]="test" [style.border]="croppedImage ? '1px solid black' : 'none'" />-->

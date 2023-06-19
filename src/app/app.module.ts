@@ -44,6 +44,7 @@ import { AccessLevelTitleComponent } from './access-levels/access-level-title/ac
 import { ProfileComponent } from './profile/profile.component';
 import {ImageCropperModule} from "ngx-image-cropper";
 import { UploadImageComponent } from './profile/upload-image/upload-image.component';
+import {MyImageCropperComponent} from "./file-upload/component/image-cropper.component";
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -67,6 +68,7 @@ const fireBaseConfig = {
     ManageUsersComponent,
     PanelComponent,
     SavebarComponent,
+    MyImageCropperComponent,
     AccessLevelTitleComponent,
     ProfileComponent,
     UploadImageComponent,
