@@ -42,35 +42,35 @@
 <input type="file" (change)="fileChangeEvent($event)" accept="image/*" />
 <br />
 <br />
-<input [(ngModel)]="imageURL" placeholder="URL to load image" type="text" />
+<!--<input [(ngModel)]="imageURL" placeholder="URL to load image" type="text" />-->
 <br />
 <br />
 <button (click)="rotateLeft()">Rotate left</button>
 <button (click)="rotateRight()">Rotate right</button>
-<button (click)="flipHorizontal()">Flip horizontal</button>
-<button (click)="flipVertical()">Flip vertical</button>
+<!--<button (click)="flipHorizontal()">Flip horizontal</button>-->
+<!--<button (click)="flipVertical()">Flip vertical</button>-->
 <br />
-<br />
-<button (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button>
-<button (click)="toggleAspectRatio()">Aspect ratio: {{aspectRatio === 4/3 ? '4/3' : '16/5'}}</button>
-<button (click)="resetImage()">Reset image</button>
-<br />
-<br />
-<input [(ngModel)]="rotation" placeholder="Rotation" type="number" (ngModelChange)="updateRotation()" /> <button (click)="zoomOut()">Zoom -</button> <button (click)="zoomIn()">Zoom +</button>
-<br />
-<br/>
-<button (click)="moveLeft()">move left</button>
-<button (click)="moveRight()">move right</button>
+<!--<br />-->
+<!--<button (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button>-->
+<!--<button (click)="toggleAspectRatio()">Aspect ratio: {{aspectRatio === 4/3 ? '4/3' : '16/5'}}</button>-->
+<!--<button (click)="resetImage()">Reset image</button>-->
+<!--<br />-->
+<!--<br />-->
+<!--<input [(ngModel)]="rotation" placeholder="Rotation" type="number" (ngModelChange)="updateRotation()" /> <button (click)="zoomOut()">Zoom -</button> <button (click)="zoomIn()">Zoom +</button>-->
+<!--<br />-->
+<!--<br/>-->
+<!--<button (click)="moveLeft()">move left</button>-->
+<!--<button (click)="moveRight()">move right</button>-->
 
-<button (click)="moveTop()">move top</button>
-<button (click)="moveBottom()">move bottom</button>
-<br/>
-<br/>
-<button (click)="allowMoveImage = !allowMoveImage;">{{allowMoveImage ? 'Disable' : 'Enable' }} image panning</button>
-<button (click)="hidden = !hidden;">{{hidden ? 'Show' : 'Hide' }}</button>
-<br/>
+<!--<button (click)="moveTop()">move top</button>-->
+<!--<button (click)="moveBottom()">move bottom</button>-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<button (click)="allowMoveImage = !allowMoveImage;">{{allowMoveImage ? 'Disable' : 'Enable' }} image panning</button>-->
+<!--<button (click)="hidden = !hidden;">{{hidden ? 'Show' : 'Hide' }}</button>-->
+<!--<br/>-->
 
-
+<div style="display: flex;justify-content: space-between">
 <div class="cropper-wrapper">
   <my-image-cropper
     [imageChangedEvent]="imageChangedEvent"
@@ -98,5 +98,8 @@
   ></my-image-cropper>
   <div *ngIf="loading" class="loader">Loading...</div>
 </div>
-<img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+<!--<div >-->
+<!--  <img style="width: 50%;height: 50%" [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />-->
+<!--</div>-->
 <!--<img [src]="test" [style.border]="croppedImage ? '1px solid black' : 'none'" />-->
+</div>
