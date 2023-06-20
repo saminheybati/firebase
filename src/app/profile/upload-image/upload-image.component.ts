@@ -19,7 +19,6 @@ export class UploadImageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   applyImage() {
     this.currentFileUpload = new FileUpload(this.selectedFile);
     console.log('this.currentFileUpload', this.currentFileUpload.file.name)
