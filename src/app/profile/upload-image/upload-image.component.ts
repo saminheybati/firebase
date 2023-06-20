@@ -19,7 +19,9 @@ export class UploadImageComponent implements OnInit {
 
   }
 
-  getImageUrl(event: string) {
-    console.log("event",event)
+  getImageUrl(event: any) {
+    event.lastModifiedDate=new Date()
+    event.name = 'fileName';
+    console.log("event",event?.changingThisBreaksApplicationSecurity as File)
   }
 }
