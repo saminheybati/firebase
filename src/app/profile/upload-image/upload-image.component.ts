@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
+import {FileUpload} from "../../../model/fileUpload";
+import {FileUploadService} from "../../../services/file-upload.service";
 
 @Component({
   selector: 'app-upload-image',
@@ -7,8 +9,11 @@ import {base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage
   styleUrls: ['./upload-image.component.scss']
 })
 export class UploadImageComponent implements OnInit {
+  selectedFile: File
+  currentFileUpload?: FileUpload;
+  percentage = 0;
 
-  constructor() {
+  constructor(private uploadService: FileUploadService) {
   }
 
   ngOnInit(): void {
@@ -16,12 +21,20 @@ export class UploadImageComponent implements OnInit {
 
 
   applyImage() {
-
+    this.currentFileUpload = new FileUpload(this.selectedFile);
+    console.log('this.currentFileUpload', this.currentFileUpload.file.name)
+    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+      percentage => {
+        this.percentage = Math.round(percentage ? percentage : 0);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getImageUrl(event: any) {
-    event.lastModifiedDate=new Date()
-    event.name = 'fileName';
-    console.log("event",event?.changingThisBreaksApplicationSecurity as File)
+    this.selectedFile = new File([event?.changingThisBreaksApplicationSecurity], "filename")
+    console.log("selectedFile", this.selectedFile)
   }
 }
