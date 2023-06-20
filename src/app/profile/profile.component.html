@@ -41,7 +41,7 @@
         </mat-card-header>
         <mat-card-content>
           <div style="display: flex;align-items: center">
-            <img src="/assets/download.jpeg" style="width: 150px;height: 150px;border-radius: 100%"/>
+            <img [src]="profilePicture" style="width: 150px;height: 150px;border-radius: 100%"/>
             <button mat-raised-button color="primary" style="margin-left: 80px" (click)="openUploadDialog()">Upload
             </button>
           </div>
@@ -82,3 +82,4 @@
     <app-savebar  (save)="getSaveData($event)"></app-savebar>
   </div>
 </div>
+

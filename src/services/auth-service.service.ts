@@ -30,7 +30,7 @@ export class AuthServiceService {
       .signInWithPopup(provider)
       .then((result) => {
         console.log('You have been successfully logged in!');
-        this._Router.navigateByUrl('/panel')
+        this._Router.navigateByUrl('/panel/users')
 
       })
       .catch((error) => {

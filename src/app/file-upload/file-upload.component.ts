@@ -16,7 +16,7 @@ export class FileUploadComponent implements OnInit {
   currentFileUpload?: FileUpload;
   percentage = 0;
   fileUploads?: any[];
-@Output() imageUrl = new EventEmitter<string>();
+  @Output() imageUrl = new EventEmitter<any>();
 
   // constructor(private uploadService: FileUploadService) {}
 
@@ -36,7 +36,7 @@ export class FileUploadComponent implements OnInit {
       this.selectedFiles = undefined;
       if (file) {
         this.currentFileUpload = new FileUpload(file);
-        console.log('this.currentFileUpload', this.currentFileUpload.file.name)
+        console.log('this.currentFileUpload11111111111111', this.currentFileUpload)
         this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
           percentage => {
             this.percentage = Math.round(percentage ? percentage : 0);
@@ -46,9 +46,9 @@ export class FileUploadComponent implements OnInit {
           }
         );
       }
-      let index=this.fileUploads?.findIndex(item=>item.name===this.currentFileUpload?.file.name)
-      console.log("index",index)
-      console.log("list",this.fileUploads)
+      let index = this.fileUploads?.findIndex(item => item.name === this.currentFileUpload?.file.name)
+      console.log("index", index)
+      console.log("list", this.fileUploads)
       // this.uploadedFile.emit()
     }
   }
@@ -73,7 +73,7 @@ export class FileUploadComponent implements OnInit {
   hidden = false;
 
   constructor(private uploadService: FileUploadService,
-    private sanitizer: DomSanitizer
+              private sanitizer: DomSanitizer
   ) {
   }
 
@@ -84,12 +84,10 @@ export class FileUploadComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl || event.base64 || '');
-    console.log('event',event);
-    console.log('cropped img',this.croppedImage);
-    this.imageUrl.emit(this.croppedImage)
+    console.log('event', event);
+    console.log('cropped img', this.croppedImage);
+    this.imageUrl.emit(event.blob)
   }
-
-test= this.sanitizer.bypassSecurityTrustUrl("blob:http://localhost:4400/915aa597-dc9c-4e1c-9b32-13ba935533ce" );
 
 
   imageLoaded() {

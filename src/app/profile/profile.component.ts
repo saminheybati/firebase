@@ -6,6 +6,7 @@ import {DataBaseService} from "../../services/data-base.service";
 import {map} from "rxjs";
 import {AccessLevelTitleComponent} from "../access-levels/access-level-title/access-level-title.component";
 import {FormBuilder, FormControl} from "@angular/forms";
+import {FileUploadService} from "../../services/file-upload.service";
 
 @Component({
   selector: 'app-profile',
@@ -17,30 +18,33 @@ export class ProfileComponent implements OnInit {
   loggedInUser: any
   loggedInUserData: any
   uid = ''
+  profilePicture: any
 
   constructor(public dialog: MatDialog,
+              private uploadService: FileUploadService,
               private form: FormBuilder,
               private service: DataBaseService) {
   }
 
   userDataForm = this.form.group({
-    dealershipDisplayName: [''],
-    salesEmail: [''],
-    salesPhoneNumber: [''],
-    showRoomAddress: [''],
-    accessLevel: [''],
-    displayName: [''],
-    email: [''],
-    isDisabled: [''],
-    id: [''],
-    isSelected: [''],
-    isTermsAccepted: [''],
-    key: [''],
-    phone: [''],
-    signUpTimeStamp: [''],
-    ts: [''],
-    username: ['']
-  }
+      dealershipDisplayName: [''],
+      salesEmail: [''],
+      salesPhoneNumber: [''],
+      showRoomAddress: [''],
+      accessLevel: [''],
+      displayName: [''],
+      email: [''],
+      isDisabled: [''],
+      id: [''],
+      isSelected: [''],
+      isTermsAccepted: [''],
+      key: [''],
+      phone: [''],
+      signUpTimeStamp: [''],
+      ts: [''],
+      avatarFullPath: [''],
+      username: ['']
+    }
   )
 
   ngOnInit(): void {
@@ -62,16 +66,15 @@ export class ProfileComponent implements OnInit {
 
   openUploadDialog() {
     this.dialog.open(UploadImageComponent, {
-      data: 'sam'
+      data: this.loggedInUserData
     });
   }
 
   getSaveData(event: boolean) {
     console.log(event)
-    if(event){
-      this.service.updateUser(this.loggedInUserData.key,this.userDataForm.value)
-    }
-    else {
+    if (event) {
+      this.service.updateUser(this.loggedInUserData.key, this.userDataForm.value)
+    } else {
       this.userDataForm.patchValue(this.loggedInUserData)
 
     }
@@ -84,10 +87,19 @@ export class ProfileComponent implements OnInit {
           (c.payload.val())
         )
       )
-    ).subscribe(data => {
-      console.log('data', data[0])
+    ).subscribe((data: any) => {
       this.loggedInUserData = data[0]
       this.userDataForm.patchValue(data[0])
+      this.uploadService.getOneUrlByUserId(data[0].id).snapshotChanges().pipe(
+        map(changes =>
+          changes.map(c =>
+            (c.payload.val())
+          )
+        )
+      ).subscribe((data: any) => {
+        console.log('img url ?', data[0].url)
+        this.profilePicture=data[0].url
+      });
     });
   }
 }

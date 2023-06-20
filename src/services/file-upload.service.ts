@@ -32,6 +32,7 @@ export class FileUploadService {
     ).subscribe();
 
     return uploadTask.percentageChanges();
+
   }
 
   private saveFileData(fileUpload: FileUpload): void {
@@ -60,7 +61,8 @@ export class FileUploadService {
     storageRef.child(name).delete();
   }
 
-  getOneFileByKey(key: any) {
+  getOneUrlByUserId(id: any) {
+    return this.db.list(this.dbPath, ref => ref.orderByChild('name').equalTo(id))
 
   }
 

@@ -53,9 +53,7 @@ export class SignInComponent implements OnInit {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.email, this.password).then((userCredential) => {
         // Signed in
-        console.log("user cridia,mn",userCredential)
         const user = userCredential.user;
-        console.log("user",user)
         this.addUserDataToDB(user)
         })
         .catch((error) => {
