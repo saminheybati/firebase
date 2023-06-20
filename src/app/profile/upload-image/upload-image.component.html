@@ -1,8 +1,23 @@
-  <div mat-dialog-content class="mat-typography" style="width: 500px;height: 500px">
-    <app-file-upload (imageUrl)="getImageUrl($event)"></app-file-upload>
-  <div mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button mat-dialog-close cdkFocusInitial (click)="applyImage()">Apply</button>
-  </div>
 
+<div class="container">
+
+<div class="content">
+  <div mat-dialog-content class="mat-typography" style="width: 800px;height: 800px" >
+    <div class="mt-3">
+      <app-file-upload (imageUrl)="getImageUrl($event)"></app-file-upload>
+    </div>
+
+  </div>
+</div>
+
+<!--<div style="display: flex;justify-content: center">-->
+<!--  <div style="width: 50%">-->
+<!--    <app-savebar  (save)="getSaveData($event)"></app-savebar>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="footer" style="display: flex;justify-content: end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="applyImage()">Apply</button>
+</div>
 </div>
