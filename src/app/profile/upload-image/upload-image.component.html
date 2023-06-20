@@ -1,8 +1,8 @@
   <div mat-dialog-content class="mat-typography" >
-    <app-file-upload></app-file-upload>
+    <app-file-upload (imageUrl)="getImageUrl($event)"></app-file-upload>
   <div mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button mat-dialog-close cdkFocusInitial>Apply</button>
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="applyImage()">Apply</button>
   </div>
 
 </div>

@@ -15,4 +15,11 @@ export class UploadImageComponent implements OnInit {
   }
 
 
+  applyImage() {
+
+  }
+
+  getImageUrl(event: string) {
+    console.log("event",event)
+  }
 }

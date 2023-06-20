@@ -16,6 +16,7 @@ export class FileUploadComponent implements OnInit {
   currentFileUpload?: FileUpload;
   percentage = 0;
   fileUploads?: any[];
+@Output() imageUrl = new EventEmitter<string>();
 
   // constructor(private uploadService: FileUploadService) {}
 
@@ -51,22 +52,7 @@ export class FileUploadComponent implements OnInit {
       // this.uploadedFile.emit()
     }
   }
-  //
-  //
-  // getUploadList() {
-  //   this.uploadService.getFiles(6).snapshotChanges().pipe(
-  //     map(changes =>
-  //       changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-  //     )
-  //   ).subscribe(fileUploads => {
-  //     this.fileUploads = fileUploads;
-  //     console.log('upeloads ', this.fileUploads)
-  //   });
-  // }
-  //
-  // getOneFileByKey() {
-  //
-  // }
+
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -100,6 +86,7 @@ export class FileUploadComponent implements OnInit {
     this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl || event.base64 || '');
     console.log('event',event);
     console.log('cropped img',this.croppedImage);
+    this.imageUrl.emit(this.croppedImage)
   }
 
 test= this.sanitizer.bypassSecurityTrustUrl("blob:http://localhost:4400/915aa597-dc9c-4e1c-9b32-13ba935533ce" );
