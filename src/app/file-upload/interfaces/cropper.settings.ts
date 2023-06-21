@@ -9,7 +9,7 @@ export class CropperSettings {
   output: OutputType = 'blob';
   maintainAspectRatio = true;
   transform: ImageTransform = {};
-  aspectRatio = 1;
+  aspectRatio =1;
   resetCropOnAspectRatioChange = true;
   resizeToWidth = 0;
   resizeToHeight = 0;
@@ -21,7 +21,7 @@ export class CropperSettings {
   cropperStaticHeight = 0;
   canvasRotation = 0;
   initialStepSize = 3;
-  roundCropper = false;
+  roundCropper = true;
   onlyScaleDown = false;
   imageQuality = 92;
   autoCrop = true;
