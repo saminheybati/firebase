@@ -73,4 +73,8 @@ export class AppComponent {
       .then(() => this.getUsersList())
       .catch(err => console.log(err));
   }
+
+  getSelectedDate(event: any) {
+    console.log(event)
+  }
 }

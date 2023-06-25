@@ -1,0 +1,10 @@
+<div style="display: flex;justify-content: center;margin-top: 50px">
+  <mat-form-field>
+    <mat-label>{{label}}</mat-label>
+    <input matInput [matDatepicker]="dp1" [(ngModel)]="date" (dateChange)="onDate($event)"
+           [min]="minDate" [max]="maxDate" [disabled]="disable" >
+    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1  ngDefaultControl ></mat-datepicker>
+  </mat-form-field>
+</div>
+
