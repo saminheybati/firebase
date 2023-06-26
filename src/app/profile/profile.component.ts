@@ -75,9 +75,11 @@ export class ProfileComponent implements OnInit {
     console.log(event)
     if (event) {
       this.service.updateUser(this.loggedInUserData.key, this.userDataForm.value)
+      this.changedOnData = false
     } else {
       this.userDataForm.patchValue(this.loggedInUserData)
-
+      this.displayName = this.loggedInUser?.providerData[0].displayName
+      this.changedOnData = false
     }
   }
 
