@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {UploadImageComponent} from "./upload-image/upload-image.component";
 import {getAuth, onAuthStateChanged} from "@angular/fire/auth";
@@ -13,17 +13,22 @@ import {FileUploadService} from "../../services/file-upload.service";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnChanges {
   displayName = ''
   loggedInUser: any
   loggedInUserData: any
   uid = ''
   profilePicture: any
+  changedOnData = false
 
   constructor(public dialog: MatDialog,
               private uploadService: FileUploadService,
               private form: FormBuilder,
               private service: DataBaseService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
   }
 
   userDataForm = this.form.group({
@@ -56,7 +61,6 @@ export class ProfileComponent implements OnInit {
         this.uid = user.uid;
         this.getOneUserData()
         this.displayName = this.loggedInUser?.providerData[0].displayName
-
       } else {
         // User is signed out
         // ...
@@ -98,7 +102,7 @@ export class ProfileComponent implements OnInit {
         )
       ).subscribe((data: any) => {
         console.log('img url ?', data[0].url)
-        this.profilePicture=data[0].url
+        this.profilePicture = data[0].url
       });
     });
   }
