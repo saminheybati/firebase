@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataBaseService} from "../../../services/data-base.service";
 import {map} from "rxjs";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import loader from "@angular-devkit/build-angular/src/webpack/plugins/single-test-transform";
+import {ConfirmationActionComponent} from "../../confirmation-action/confirmation-action.component";
 
 @Component({
   selector: 'app-manage-users',
@@ -25,6 +26,7 @@ export class ManageUsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private dataBaseService: DataBaseService,
+              public dialog: MatDialog,
               private dialogRef: MatDialogRef<ManageUsersComponent>) {
   }
 
@@ -44,12 +46,11 @@ export class ManageUsersComponent implements OnInit {
     ).subscribe(data => {
       this.dataSource = data
       this.allData = data
-
-      this.newDataSource = new MatTableDataSource(this.allData);
-      this.newDataSource.paginator = this.paginator;
+      this.newDataSource = new MatTableDataSource(this.allData)
+     setTimeout(() => this.newDataSource.paginator = this.paginator)
       this.loader=false
-      this.totalElements = this.dataSource.length
-      console.log('users', data)
+      this.totalElements = this.newDataSource.filteredData.length
+      setTimeout(() =>  console.log('users', data))
     });
   }
 
@@ -65,6 +66,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
   selectionChange(event: number) {
+    this.term=''
     this.buttonText = this.tabs[event]
     this.selectedUsers = []
     if (this.buttonText === 'Delete Users') {
@@ -77,19 +79,46 @@ export class ManageUsersComponent implements OnInit {
   }
 
   action() {
+    let confirmationDialog
     for (let user of this.selectedUsers) {
       user.isSelected = false
       if (this.buttonText === 'Delete Users') {
-        this.dataBaseService.deleteUser(user.key)
+        confirmationDialog =this.dialog.open(ConfirmationActionComponent, {
+          data: 'delete selected users',
+        });
+        confirmationDialog.afterClosed().subscribe(result => {
+          if(result==='yes'){
+            this.dataBaseService.deleteUser(user.key)
+            this.dialogRef.close();
+          }
+        });
       } else if (this.buttonText === 'Enable Users') {
-        user.isDisabled = false
-        this.dataBaseService.updateUser(user.key, user)
+        confirmationDialog =this.dialog.open(ConfirmationActionComponent, {
+          data: 'enable selected users',
+        });
+        confirmationDialog.afterClosed().subscribe(result => {
+          if(result==='yes'){
+            user.isDisabled = false
+            this.dataBaseService.updateUser(user.key, user)
+            this.dialogRef.close();
+          }
+        });
       } else if (this.buttonText === 'Disable Users') {
-        user.isDisabled = true
-        this.dataBaseService.updateUser(user.key, user)
+        confirmationDialog =this.dialog.open(ConfirmationActionComponent, {
+          data: 'disable selected users',
+        });
+        confirmationDialog.afterClosed().subscribe(result => {
+          if(result==='yes'){
+            user.isDisabled = true
+            this.dataBaseService.updateUser(user.key, user)
+            this.dialogRef.close();
+
+          }
+        });
+
       }
-      this.dialogRef.close();
     }
+
   }
 
   getUsersByIsDisabled(isDisabled) {
@@ -100,7 +129,11 @@ export class ManageUsersComponent implements OnInit {
         )
       )
     ).subscribe(data => {
-      this.dataSource = data
+      console.log(data)
+      this.newDataSource = new MatTableDataSource(data)
+      setTimeout(() => this.newDataSource.paginator = this.paginator)
+      this.loader=false
+      this.totalElements = data.length
     });
   }
 

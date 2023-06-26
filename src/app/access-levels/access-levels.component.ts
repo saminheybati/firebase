@@ -17,6 +17,7 @@ export class AccessLevelsComponent implements OnInit {
   selectedElements = []
   loader = true
   disable = false
+  changedOnData=false
 
   ngOnInit(): void {
     this.getAccLvlsList()
@@ -94,8 +95,10 @@ export class AccessLevelsComponent implements OnInit {
 
   changeCheckbox(element, $event: MouseEvent) {
     // this.accessLevelService.updateItem(element.key,element)
+    console.log('el',element)
     this.selectedElements.push(element)
     console.log("selected", this.selectedElements)
+    this.changedOnData=true
 
   }
 
@@ -104,8 +107,10 @@ export class AccessLevelsComponent implements OnInit {
     if (event) {
       for (let item of this.selectedElements) {
         this.accessLevelService.updateItem(item.key, item)
+        this.changedOnData=false
       }
     } else {
+      this.changedOnData=false
       this.selectedElements = []
       this.getAccLvlsList()
     }

@@ -49,6 +49,7 @@ import { ControlValueComponent } from './control-value/control-value.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { ConfirmationActionComponent } from './confirmation-action/confirmation-action.component';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -78,6 +79,7 @@ const fireBaseConfig = {
     UploadImageComponent,
     ControlValueComponent,
     DatePickerComponent,
+    ConfirmationActionComponent,
   ],
     imports: [
         BrowserModule,

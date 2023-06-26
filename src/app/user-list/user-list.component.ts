@@ -51,13 +51,12 @@ export class UserListComponent implements OnInit ,AfterViewInit{
     ).subscribe(data => {
       this.dataSource = data
       this.allData = data
-
       this.newDataSource = new MatTableDataSource(this.allData);
-      this.newDataSource.paginator = this.paginator;
-
-      this.totalElements = this.dataSource.length
+      // this.newDataSource.paginator = this.paginator;
+      setTimeout(() =>  this.totalElements = this.newDataSource.filteredData.length)
+      setTimeout(() => this.newDataSource.paginator = this.paginator);
       this.loader = false
-      console.log('users', data)
+      console.log('users', this.newDataSource)
     });
   }
 
@@ -108,15 +107,16 @@ export class UserListComponent implements OnInit ,AfterViewInit{
 
   filterByRole(event: MatSelectChange) {
     this.loader = true
+    this.term=''
     this.dataBaseService.getUsersByRole(event.value).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           (c.payload.val())
         )
       )
-    ).subscribe(data => {
-      this.dataSource = data
-      this.allData = data
+    ).subscribe((data:any) => {
+      this.newDataSource = new MatTableDataSource(data);
+      this.totalElements = this.newDataSource.filteredData.length
       this.loader = false
     });
   }
@@ -126,7 +126,7 @@ export class UserListComponent implements OnInit ,AfterViewInit{
     // console.log("aall data", this.allData)
     // this.dataSource = this.allData.filter(x => x.displayName.toLowerCase().includes(this.term.toLowerCase()))
     // const filterValue = (event.target as HTMLInputElement).value;
-
+    // this.newDataSource=new MatTableDataSource(this.allData);
     this.newDataSource.filter = this.term.trim().toLowerCase();
     if (this.newDataSource.paginator) {
       this.newDataSource.paginator.firstPage();
@@ -135,8 +135,6 @@ export class UserListComponent implements OnInit ,AfterViewInit{
 
 
   changeUsersRole(event: MatSelectChange, element) {
-    console.log('event', event.value)
-    console.log('element', element)
     this.dataBaseService.changeUsersRole(element.key, element)
   }
 
@@ -157,7 +155,8 @@ export class UserListComponent implements OnInit ,AfterViewInit{
   //   }
   //
   // }
-  pagination($event: Event) {
-    console.log("event",$event)
+  pagination(event: any) {
+    console.log("event",event)
+
   }
 }

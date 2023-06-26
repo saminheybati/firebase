@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Confirmation</h1>
+<div mat-dialog-content>
+  <p>are u sure to {{data}}?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="'no'">No ,Cancel</button>
+  <button mat-button [mat-dialog-close]="'yes'" cdkFocusInitial>Yes</button>
+</div>

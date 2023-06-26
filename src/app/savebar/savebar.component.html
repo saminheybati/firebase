@@ -3,8 +3,8 @@
 <div style="display: flex;justify-content: end;margin-top: 10px">
   <mat-card style="width: 100%">
     <mat-card-actions style="display: flex;justify-content: end;margin-bottom: 5px">
-      <button mat-raised-button  style="margin-right: 10px" (click)="cancelButton()">cancel</button>
-      <button mat-raised-button color="primary" (click)="saveButton()">save</button>
+      <button mat-raised-button  style="margin-right: 10px" (click)="cancelButton()" [disabled]="!enable">cancel</button>
+      <button mat-raised-button color="primary" (click)="saveButton()" [disabled]="!enable">save</button>
     </mat-card-actions>
   </mat-card>
 </div>

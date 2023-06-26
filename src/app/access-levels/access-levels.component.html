@@ -91,7 +91,7 @@
 </div>
 <div style="display: flex;justify-content: center" *ngIf="!loader">
   <div style="width: 80%">
-    <app-savebar (save)="getSaveData($event)"></app-savebar>
+    <app-savebar (save)="getSaveData($event)" [enable]="changedOnData"></app-savebar>
   </div>
 </div>
 
