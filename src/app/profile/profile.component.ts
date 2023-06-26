@@ -13,7 +13,7 @@ import {FileUploadService} from "../../services/file-upload.service";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, OnChanges {
+export class ProfileComponent implements OnInit {
   displayName = ''
   loggedInUser: any
   loggedInUserData: any
@@ -27,9 +27,6 @@ export class ProfileComponent implements OnInit, OnChanges {
               private service: DataBaseService) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-  }
 
   userDataForm = this.form.group({
       dealershipDisplayName: [''],
@@ -94,6 +91,8 @@ export class ProfileComponent implements OnInit, OnChanges {
     ).subscribe((data: any) => {
       this.loggedInUserData = data[0]
       this.userDataForm.patchValue(data[0])
+      // console.log('loggedInUserData',this.loggedInUserData)
+      // console.log('formm',this.userDataForm.value)
       this.uploadService.getOneUrlByUserId(data[0].id).snapshotChanges().pipe(
         map(changes =>
           changes.map(c =>
@@ -101,9 +100,13 @@ export class ProfileComponent implements OnInit, OnChanges {
           )
         )
       ).subscribe((data: any) => {
-        console.log('img url ?', data[0].url)
+        // console.log('img url ?', data[0].url)
         this.profilePicture = data[0].url
       });
     });
+  }
+
+  checkChanges() {
+    this.changedOnData = this.loggedInUserData !== this.userDataForm.value;
   }
 }

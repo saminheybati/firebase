@@ -27,7 +27,7 @@
         <mat-card-content>
           <mat-form-field appearance="outline">
             <mat-label>Display Name</mat-label>
-            <input class="form-select" matInput placeholder="Display Name" [(ngModel)]="displayName">
+            <input class="form-select" matInput placeholder="Display Name" (keyup)="checkChanges()" [(ngModel)]="displayName">
           </mat-form-field>
         </mat-card-content>
       </mat-card>
@@ -50,25 +50,25 @@
             <div style="margin-top: 50px;display: flex;justify-content: space-between">
               <mat-form-field appearance="outline" style="width: 100%;margin-right: 10px">
                 <mat-label>Dealership Display Name</mat-label>
-                <input class="form-select" matInput placeholder="Dealership Display Name" formControlName="dealershipDisplayName">
+                <input class="form-select" matInput placeholder="Dealership Display Name" (keyup)="checkChanges()" formControlName="dealershipDisplayName">
               </mat-form-field>
               <mat-form-field appearance="outline" style="width: 100%">
                 <mat-label>Sales Email</mat-label>
-                <input class="form-select" matInput placeholder="Sales Email" formControlName="salesEmail">
+                <input class="form-select" matInput placeholder="Sales Email" (keyup)="checkChanges()" formControlName="salesEmail">
               </mat-form-field>
             </div>
 
             <div style=";display: flex;justify-content: space-between">
               <mat-form-field appearance="outline" style="width: 100%;margin-right: 10px">
                 <mat-label>Sales Phone Number</mat-label>
-                <input class="form-select" matInput placeholder="Dealership Display Name" formControlName="salesPhoneNumber">
+                <input class="form-select" matInput placeholder="Dealership Display Name" (keyup)="checkChanges()" formControlName="salesPhoneNumber">
                 <mat-icon matSuffix style="cursor: pointer">edit</mat-icon>
               </mat-form-field>
             </div>
             <div style=";display: flex;justify-content: space-between">
               <mat-form-field appearance="outline" style="width: 80%;margin-right: 10px">
                 <mat-label>Show Room Address</mat-label>
-                <input class="form-select" matInput placeholder="Dealership Display Name" formControlName="showRoomAddress">
+                <input class="form-select" matInput placeholder="Dealership Display Name" (keyup)="checkChanges()" formControlName="showRoomAddress">
               </mat-form-field>
             </div>
 
@@ -81,11 +81,7 @@
   </div>
 </div>
 
-<!--<div style="display: flex;justify-content: center">-->
-<!--  <div style="width: 50%">-->
-<!--    <app-savebar  (save)="getSaveData($event)"></app-savebar>-->
-<!--  </div>-->
-<!--</div>-->
+
 
 <div class="footer">
       <app-savebar  (save)="getSaveData($event)" [enable]="changedOnData"></app-savebar>
