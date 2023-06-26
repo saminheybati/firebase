@@ -3,10 +3,11 @@
     <div style="display: flex;justify-content: start">
       <mat-select placeholder="User Role" (selectionChange)="filterByRole($event)"
                   class="form-select" aria-label="Default select example"
+                  [disabled]="disableFilter"
                   style="border-color: lightgrey;margin-right: 20px">
         <mat-option *ngFor="let item of accessLevels" [value]="item.id">{{item.title}}</mat-option>
       </mat-select>
-      <input class="form-select" placeholder="Search" (keyup)="filterByName($event)" [(ngModel)]="term">
+      <input class="form-select" placeholder="Search" (keyup)="filterByName($event)" [(ngModel)]="term" [disabled]="disableFilter">
     </div>
     <div style="display: flex;justify-content: end">
       <button mat-raised-button color="primary" class="btn-block" (click)="openDialog()">Manage Users</button>
@@ -17,7 +18,7 @@
   <div style="display: flex;justify-content: space-between;width: 80%">
     <div style="display: flex;margin-right: 20px">
       <app-date-picker [label]="'samin'"
-                       [disable]="false"
+                       [disable]="disableFilter"
                        [acceptableMaxPreviousDay]="1000"
                        [acceptableMaxNextDay]="0"
                        [defaultValue]="'6/21/2023, 12:00:00 AM'"
