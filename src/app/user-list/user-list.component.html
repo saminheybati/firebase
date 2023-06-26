@@ -1,4 +1,4 @@
-<div style="display: flex;justify-content: center;margin-bottom: 20px;margin-top: 80px">
+<div style="display: flex;justify-content: center;margin-top: 80px">
   <div style="display: flex;justify-content: space-between;width: 80%">
     <div style="display: flex;justify-content: start">
       <mat-select placeholder="User Role" (selectionChange)="filterByRole($event)"
@@ -8,9 +8,21 @@
       </mat-select>
       <input class="form-select" placeholder="Search" (keyup)="filterByName($event)" [(ngModel)]="term">
     </div>
-
     <div style="display: flex;justify-content: end">
       <button mat-raised-button color="primary" class="btn-block" (click)="openDialog()">Manage Users</button>
+    </div>
+  </div>
+</div>
+<div style="display: flex;justify-content: center;margin-bottom: 20px">
+  <div style="display: flex;justify-content: space-between;width: 80%">
+    <div style="display: flex;margin-right: 20px">
+      <app-date-picker [label]="'samin'"
+                       [disable]="false"
+                       [acceptableMaxPreviousDay]="1000"
+                       [acceptableMaxNextDay]="0"
+                       [defaultValue]="'6/21/2023, 12:00:00 AM'"
+                       (selectedDate)="getSelectedDate($event)"
+      ></app-date-picker>
     </div>
   </div>
 </div>
@@ -31,6 +43,10 @@
       <th mat-header-cell *matHeaderCellDef>Email</th>
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
+    <ng-container matColumnDef="signUpTimeStamp">
+      <th mat-header-cell *matHeaderCellDef>signUp Time</th>
+      <td mat-cell *matCellDef="let element"> {{element.signUpTimeStamp | date: 'yyyy-MM-dd'}} </td>
+    </ng-container>
 
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef>Role</th>
@@ -42,6 +58,7 @@
         </mat-select>
       </td>
     </ng-container>
+
 
     <ng-container matColumnDef="activity">
       <th mat-header-cell *matHeaderCellDef>User Activity</th>
@@ -62,7 +79,8 @@
                  aria-label="Select page of users"></mat-paginator>
 </div>
 
-<div *ngIf="!loader && newDataSource.filteredData.length===0" style="display: flex;justify-content: center;margin-top: 50px">
+<div *ngIf="!loader && newDataSource.filteredData.length===0"
+     style="display: flex;justify-content: center;margin-top: 50px">
   <h1> there isn't any data to display!!!
   </h1>
 </div>

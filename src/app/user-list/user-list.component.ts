@@ -14,10 +14,10 @@ import {MatPaginator} from "@angular/material/paginator";
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit ,AfterViewInit{
+export class UserListComponent implements OnInit, AfterViewInit {
   dataSource = []
   allData = []
-  displayedColumns: string[] = ['name', 'email', 'role', 'activity'];
+  displayedColumns: string[] = ['name', 'email', 'signUpTimeStamp', 'role', 'activity'];
   name: string = ''
   editMode = false
   editKey: string = ''
@@ -26,16 +26,22 @@ export class UserListComponent implements OnInit ,AfterViewInit{
   loader = false
   totalElements = 0
   newDataSource: MatTableDataSource<any>;
- @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  timeTest = 15445658888
+
   constructor(private dataBaseService: DataBaseService,
               public dialog: MatDialog,
               private accessLevelService: AccessLevelsService) {
   }
 
   ngAfterViewInit(): void {
-    }
+  }
 
   ngOnInit(): void {
+    console.log('this.timeTest', this.timeTest)
+    var dateFormat = new Date(this.timeTest);
+    console.log('time', dateFormat)
+
     this.getUsersList()
     this.getAccessLevelsList()
   }
@@ -53,7 +59,7 @@ export class UserListComponent implements OnInit ,AfterViewInit{
       this.allData = data
       this.newDataSource = new MatTableDataSource(this.allData);
       // this.newDataSource.paginator = this.paginator;
-      setTimeout(() =>  this.totalElements = this.newDataSource.filteredData.length)
+      setTimeout(() => this.totalElements = this.newDataSource.filteredData.length)
       setTimeout(() => this.newDataSource.paginator = this.paginator);
       this.loader = false
       console.log('users', this.newDataSource)
@@ -107,14 +113,15 @@ export class UserListComponent implements OnInit ,AfterViewInit{
 
   filterByRole(event: MatSelectChange) {
     this.loader = true
-    this.term=''
+    this.term = ''
     this.dataBaseService.getUsersByRole(event.value).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           (c.payload.val())
         )
       )
-    ).subscribe((data:any) => {
+    ).subscribe((data: any) => {
+      console.log("users", data)
       this.newDataSource = new MatTableDataSource(data);
       this.totalElements = this.newDataSource.filteredData.length
       this.loader = false
@@ -156,7 +163,13 @@ export class UserListComponent implements OnInit ,AfterViewInit{
   //
   // }
   pagination(event: any) {
-    console.log("event",event)
+    console.log("event", event)
+  }
 
+  getSelectedDate(event: Date) {
+    this.newDataSource.filter =event.getTime().toString().trim().toLowerCase();
+    if (this.newDataSource.paginator) {
+      this.newDataSource.paginator.firstPage();
+    }
   }
 }
