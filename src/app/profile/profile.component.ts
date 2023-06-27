@@ -111,4 +111,8 @@ export class ProfileComponent implements OnInit {
   checkChanges() {
     this.changedOnData = this.loggedInUserData !== this.userDataForm.value;
   }
+
+  getSelectedDate($event: Date) {
+
+  }
 }

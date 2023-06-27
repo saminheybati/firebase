@@ -38,9 +38,9 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log('this.timeTest', this.timeTest)
+    // console.log('this.timeTest', this.timeTest)
     var dateFormat = new Date(this.timeTest);
-    console.log('time', dateFormat)
+    // console.log('time', dateFormat)
 
     this.getUsersList()
     this.getAccessLevelsList()
@@ -64,7 +64,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
       setTimeout(() => this.newDataSource.paginator = this.paginator);
       this.loader = false
       this.disableFilter=false
-      console.log('users', this.newDataSource)
+      // console.log('users', this.newDataSource)
     });
   }
 
@@ -107,7 +107,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
         )
       )
     ).subscribe(data => {
-      console.log('access levels', data)
+      // console.log('access levels', data)
       this.accessLevels = data
 
     });
