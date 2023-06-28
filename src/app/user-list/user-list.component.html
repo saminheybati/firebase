@@ -19,8 +19,8 @@
     <div style="display: flex;margin-right: 20px">
       <app-date-picker [label]="'select a date for filter'"
                        [disable]="disableFilter"
-                       [acceptableMaxPreviousDay]="30"
-                       [acceptableMaxNextDay]="0"
+                       [acceptableMaxPreviousDay]="3"
+                       [acceptableMaxNextDay]="3"
                        (selectedDate)="getSelectedDate($event)"
       ></app-date-picker>
     </div>

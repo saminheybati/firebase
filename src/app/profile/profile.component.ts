@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit, CanDeactivateMyComponent {
       if (result === 'refresh') {
         this.loader=false
         setTimeout(() => this.getOneUserData())
-      window.location.reload()
+      // window.location.reload()
       }
     });
   }
