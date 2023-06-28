@@ -21,6 +21,8 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canDeactivate: [ExitConfirmGuard]
+
   },
   {
     path: 'control-value',

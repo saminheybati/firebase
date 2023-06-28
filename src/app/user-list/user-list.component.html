@@ -19,8 +19,8 @@
     <div style="display: flex;margin-right: 20px">
       <app-date-picker [label]="'samin'"
                        [disable]="disableFilter"
-                       [acceptableMaxPreviousDay]="10"
-                       [acceptableMaxNextDay]="0"
+                       [acceptableMaxPreviousDay]="3"
+                       [acceptableMaxNextDay]="3"
                        [defaultValue]="'Sat Jun 17 2023 00:00:00 GMT+0330 (Iran Standard Time)'"
                        (selectedDate)="getSelectedDate($event)"
       ></app-date-picker>

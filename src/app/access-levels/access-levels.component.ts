@@ -19,7 +19,6 @@ export class AccessLevelsComponent implements OnInit, CanDeactivateMyComponent {
   loader = true
   disable = false
   changedOnData = false
-  exitChecker = true;
 
   ngOnInit(): void {
     this.getAccLvlsList()
@@ -108,15 +107,9 @@ export class AccessLevelsComponent implements OnInit, CanDeactivateMyComponent {
 
   confirm(): boolean {
     if (this.changedOnData) {
-      if (this.exitChecker) {
-        return confirm('You didnt save you changes !!');
-      }
-      return true;
+      return confirm('You didnt save you changes !!');
     }
     return true
   }
 
-  exit(event: boolean) {
-    this.exitChecker = event;
-  }
 }

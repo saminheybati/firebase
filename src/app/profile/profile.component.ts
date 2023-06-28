@@ -7,13 +7,14 @@ import {map} from "rxjs";
 import {AccessLevelTitleComponent} from "../access-levels/access-level-title/access-level-title.component";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {FileUploadService} from "../../services/file-upload.service";
+import {CanDeactivateMyComponent} from "../../services/exit-confirm.guard";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit ,CanDeactivateMyComponent{
   displayName = ''
   loggedInUser: any
   loggedInUserData: any
@@ -115,4 +116,12 @@ export class ProfileComponent implements OnInit {
   getSelectedDate($event: Date) {
 
   }
+
+  confirm(): boolean {
+    if (this.changedOnData) {
+        return confirm('You didnt save you changes !!');
+    }
+    return true
+  }
+
 }
