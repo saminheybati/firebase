@@ -5,6 +5,7 @@ import {UserListComponent} from "../../user-list/user-list.component";
 import {AccessLevelsComponent} from "../../access-levels/access-levels.component";
 import {ProfileComponent} from "../../profile/profile.component";
 import {ControlValueComponent} from "../../control-value/control-value.component";
+import {ExitConfirmGuard} from "../../../services/exit-confirm.guard";
 
 const routes: Routes = [
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   {
     path: 'access-levels',
     component: AccessLevelsComponent,
+    canDeactivate: [ExitConfirmGuard]
   },
   {
     path: 'profile',

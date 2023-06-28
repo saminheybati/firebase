@@ -2,6 +2,7 @@ import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core'
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {combineLatest} from "rxjs";
 import {DateAdapter} from "@angular/material/core";
+import {CanDeactivateMyComponent} from "../../services/exit-confirm.guard";
 
 @Component(
   {
@@ -16,13 +17,14 @@ import {DateAdapter} from "@angular/material/core";
       },
     ],
   })
-export class DatePickerComponent implements ControlValueAccessor {
-  dateControl!: FormControl;
-  @Input()  label: string;
-  @Input()  disable: boolean;
-  @Input()  acceptableMaxNextDay: number;
-  @Input()  acceptableMaxPreviousDay: number;
-  @Input()  defaultValue: any;
+export class DatePickerComponent implements ControlValueAccessor{
+  dateControl = new FormControl(new Date());
+
+  @Input() label: string;
+  @Input() disable: boolean;
+  @Input() acceptableMaxNextDay: number;
+  @Input() acceptableMaxPreviousDay: number;
+  @Input() defaultValue: any;
   @Output() selectedDate = new EventEmitter<Date>();
 
   maxDate: Date
@@ -40,8 +42,10 @@ export class DatePickerComponent implements ControlValueAccessor {
   }
 
   public ngOnInit(): void {
-    this.dateControl = new FormControl();
-    this.writeValue(this.defaultValue)
+    this.dateControl = new FormControl(this.defaultValue)
+    console.log('zzzzzzzzzz', this.dateControl.value)
+    this.dateControl = new FormControl(this.defaultValue);
+    // this.dateControl.setValue(('Thu Jun 22 2023 00:00:00 GMT+0330 (Iran Standard Time)'))
 
     combineLatest([
       this.dateControl.valueChanges,
@@ -68,6 +72,7 @@ export class DatePickerComponent implements ControlValueAccessor {
   date: Date = new Date()
 
   public now: Date = new Date();
+
   // private exitChecker: boolean=false;
 
   constructor(private _dateAdapter: DateAdapter<any>) {
@@ -76,7 +81,9 @@ export class DatePickerComponent implements ControlValueAccessor {
     }, 1);
   }
 
-  //
+
+
+
   // // ngOnInit(): void {
   // //   this.maxDate = this._dateAdapter.addCalendarDays(this.now, this.acceptableMaxNextDay)
   // //   let previous = -1 * this.acceptableMaxPreviousDay
@@ -98,17 +105,7 @@ export class DatePickerComponent implements ControlValueAccessor {
   //
   // }
   //
-  // confirm(): boolean {
-  //     if (this.exitChecker) {
-  //       return confirm('امتحان شما به اتمام نرسیده است ایا مایل به خروج هستید؟؟');
-  //     }
-  //   else {
-  //     if (this.exitChecker) {
-  //       return confirm('سوالات شما به اتمام نرسیده است ایا مایل به خروج از امتحان هستید؟؟');
-  //     }
-  //     return true;
-  //   }
-  // }
+
   //
   // exit(event: boolean) {
   //   this.exitChecker = event;
