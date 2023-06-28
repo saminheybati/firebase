@@ -1,20 +1,20 @@
 <div style="display: flex;justify-content: center;margin-top: 50px">
 <!--  <div [formGroup]="dateForm">-->
-        <mat-form-field>
-          <mat-label>{{label}}</mat-label>
-          <input matInput [matDatepicker]="dp1"
-                 [min]="minDate" [max]="maxDate" >
-          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
-          <mat-datepicker #dp1 ngDefaultControl></mat-datepicker>
-        </mat-form-field>
-<!--    <mat-form-field style="display: contents!important;">-->
-<!--      <mat-label>{{label}}</mat-label>-->
-<!--      <input matInput [matDatepicker]="dp1" formControlName="date"-->
-<!--             [min]="minDate" [max]="maxDate">-->
-<!--&lt;!&ndash;      <mat-hint>MM/DD/YYYY</mat-hint>&ndash;&gt;-->
-<!--      <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>-->
-<!--      <mat-datepicker #dp1 [disabled]="disable" ngDefaultControl></mat-datepicker>-->
-<!--    </mat-form-field>-->
+<!--        <mat-form-field>-->
+<!--          <mat-label>{{label}}</mat-label>-->
+<!--          <input matInput [matDatepicker]="dp1" [formControl]="control"-->
+<!--                 [min]="minDate" [max]="maxDate" >-->
+<!--          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>-->
+<!--          <mat-datepicker #dp1 ngDefaultControl></mat-datepicker>-->
+<!--        </mat-form-field>-->
+    <mat-form-field >
+      <mat-label>{{label}}</mat-label>
+      <input matInput [matDatepicker]="dp1" [formControl]="control"
+             [min]="minDate" [max]="maxDate">
+<!--      <mat-hint>MM/DD/YYYY</mat-hint>-->
+      <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+      <mat-datepicker #dp1 [disabled]="disable" ngDefaultControl></mat-datepicker>
+    </mat-form-field>
   </div>
 <!--</div>-->
 
