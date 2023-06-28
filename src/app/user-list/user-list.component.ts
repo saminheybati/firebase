@@ -64,7 +64,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
       setTimeout(() => this.newDataSource.paginator = this.paginator);
       this.loader = false
       this.disableFilter=false
-      // console.log('users', this.newDataSource)
     });
   }
 
@@ -107,7 +106,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
         )
       )
     ).subscribe(data => {
-      // console.log('access levels', data)
       this.accessLevels = data
 
     });
@@ -131,11 +129,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   filterByName(event: any) {
-    // console.log(this.term)
-    // console.log("aall data", this.allData)
-    // this.dataSource = this.allData.filter(x => x.displayName.toLowerCase().includes(this.term.toLowerCase()))
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.newDataSource=new MatTableDataSource(this.allData);
     this.newDataSource.filter = this.term.trim().toLowerCase();
     if (this.newDataSource.paginator) {
       this.newDataSource.paginator.firstPage();
@@ -152,18 +145,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
 
   }
 
-  // getSaveData(event: boolean) {
-  //    if (event){
-  //     for (let item of this.selectedElements){
-  //       this.accessLevelService.updateItem(item.key,item)
-  //     }
-  //   }
-  //   else {
-  //     this.selectedElements=[]
-  //     this.getAccLvlsList()
-  //   }
-  //
-  // }
+
   pagination(event: any) {
     console.log("event", event)
   }

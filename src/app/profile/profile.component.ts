@@ -14,13 +14,14 @@ import {CanDeactivateMyComponent} from "../../services/exit-confirm.guard";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit ,CanDeactivateMyComponent{
-  displayName = ''
+export class ProfileComponent implements OnInit, CanDeactivateMyComponent {
   loggedInUser: any
   loggedInUserData: any
   uid = ''
   profilePicture: any
   changedOnData = false
+  signUpDate: Date
+  loader = true
 
   constructor(public dialog: MatDialog,
               private uploadService: FileUploadService,
@@ -54,11 +55,9 @@ export class ProfileComponent implements OnInit ,CanDeactivateMyComponent{
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('user', user)
         this.loggedInUser = user
         this.uid = user.uid;
         this.getOneUserData()
-        this.displayName = this.loggedInUser?.providerData[0].displayName
       } else {
         // User is signed out
         // ...
@@ -67,8 +66,16 @@ export class ProfileComponent implements OnInit ,CanDeactivateMyComponent{
   }
 
   openUploadDialog() {
-    this.dialog.open(UploadImageComponent, {
+    let dialog
+    dialog = this.dialog.open(UploadImageComponent, {
       data: this.loggedInUserData
+    });
+    dialog.afterClosed().subscribe(result => {
+      if (result === 'refresh') {
+        this.loader=false
+        setTimeout(() => this.getOneUserData())
+      window.location.reload()
+      }
     });
   }
 
@@ -79,7 +86,6 @@ export class ProfileComponent implements OnInit ,CanDeactivateMyComponent{
       this.changedOnData = false
     } else {
       this.userDataForm.patchValue(this.loggedInUserData)
-      this.displayName = this.loggedInUser?.providerData[0].displayName
       this.changedOnData = false
     }
   }
@@ -94,8 +100,8 @@ export class ProfileComponent implements OnInit ,CanDeactivateMyComponent{
     ).subscribe((data: any) => {
       this.loggedInUserData = data[0]
       this.userDataForm.patchValue(data[0])
-      // console.log('loggedInUserData',this.loggedInUserData)
-      // console.log('formm',this.userDataForm.value)
+      console.log(this.loggedInUserData)
+      this.signUpDate = new Date(+this.loggedInUserData.signUpTimeStamp)
       this.uploadService.getOneUrlByUserId(data[0].id).snapshotChanges().pipe(
         map(changes =>
           changes.map(c =>
@@ -103,9 +109,10 @@ export class ProfileComponent implements OnInit ,CanDeactivateMyComponent{
           )
         )
       ).subscribe((data: any) => {
-        // console.log('img url ?', data[0].url)
         this.profilePicture = data[0].url
       });
+      this.loader = false
+
     });
   }
 
@@ -113,13 +120,14 @@ export class ProfileComponent implements OnInit ,CanDeactivateMyComponent{
     this.changedOnData = this.loggedInUserData !== this.userDataForm.value;
   }
 
-  getSelectedDate($event: Date) {
-
+  getSelectedDate(event: Date) {
+    this.userDataForm.patchValue({'signUpTimeStamp': event.getTime().toString().trim().toLowerCase()})
+    this.changedOnData = true
   }
 
   confirm(): boolean {
     if (this.changedOnData) {
-        return confirm('You didnt save you changes !!');
+      return confirm('You didnt save you changes !!');
     }
     return true
   }

@@ -23,7 +23,7 @@ export class DatePickerComponent implements ControlValueAccessor {
   @Input() disable: boolean;
   @Input() acceptableMaxNextDay: number;
   @Input() acceptableMaxPreviousDay: number;
-  @Input() defaultValue: any;
+  @Input() defaultValue: Date;
   @Output() selectedDate = new EventEmitter<Date>();
 
   maxDate: Date
@@ -45,12 +45,11 @@ export class DatePickerComponent implements ControlValueAccessor {
   control!: FormControl;
 
   ngOnInit(): void {
-    this.control = new FormControl();
+    this.control = new FormControl(this.defaultValue);
     console.log(this.control.value)
     this.control.valueChanges.subscribe((value) => {
       this.onChange(value);
       this.onTouched();
-      console.log(value)
       this.selectedDate.emit(value);
     });
     let dateMin = new Date()
