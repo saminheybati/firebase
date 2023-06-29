@@ -50,6 +50,7 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import { ConfirmationActionComponent } from './confirmation-action/confirmation-action.component';
+import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -80,6 +81,7 @@ const fireBaseConfig = {
     ControlValueComponent,
     DatePickerComponent,
     ConfirmationActionComponent,
+    DateRangePickerComponent,
   ],
     imports: [
         BrowserModule,
