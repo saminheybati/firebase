@@ -55,9 +55,6 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   }
 
   checkValidation() {
-    console.log('cje')
-    console.log('this.endDateControl.value', this.endDateControl.value)
-    console.log('this.starrrrrrrrrrateControl.value', this.startDateControl.value)
     let m = Math.floor((Date.UTC(this.endDateControl.value.getFullYear(), this.endDateControl.value.getMonth(), this.endDateControl.value.getDate()) - Date.UTC(this.startDateControl.value.getFullYear(), this.startDateControl.value.getMonth(), this.startDateControl.value.getDate())) / (1000 * 60 * 60 * 24));
     if (this.minAcceptableNumberOfDays <= m) {
       if (m <= this.maxAcceptableNumberOfDays) {
