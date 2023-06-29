@@ -7,7 +7,8 @@
                   style="border-color: lightgrey;margin-right: 20px">
         <mat-option *ngFor="let item of accessLevels" [value]="item.id">{{item.title}}</mat-option>
       </mat-select>
-      <input class="form-select" placeholder="Search" (keyup)="filterByName($event)" [(ngModel)]="term" [disabled]="disableFilter">
+      <input class="form-select" placeholder="Search" (keyup)="filterByName($event)" [(ngModel)]="term"
+             [disabled]="disableFilter">
     </div>
     <div style="display: flex;justify-content: end">
       <button mat-raised-button color="primary" class="btn-block" (click)="openDialog()">Manage Users</button>
@@ -17,12 +18,26 @@
 <div style="display: flex;justify-content: center;margin-bottom: 20px">
   <div style="display: flex;justify-content: space-between;width: 80%">
     <div style="display: flex;margin-right: 20px">
-      <app-date-picker [label]="'select a date for filter'"
-                       [disable]="disableFilter"
-                       [acceptableMaxPreviousDay]="3"
-                       [acceptableMaxNextDay]="3"
-                       (selectedDate)="getSelectedDate($event)"
-      ></app-date-picker>
+      <div>
+        <app-date-picker [label]="'select a date for filter'"
+                         [disable]="disableFilter"
+                         [acceptableMaxPreviousDay]="3"
+                         [acceptableMaxNextDay]="3"
+                         (selectedDate)="getSelectedDate($event)"
+        ></app-date-picker>
+      </div>
+      <div style="margin-left: 50px">
+        <app-date-range-picker [disable]="disableFilter"
+                               [label]="'Enter a date range'"
+                               [startDate]="startDate"
+                               [endDate]="endDate"
+                               [acceptableMaxNextDay]="20"
+                               [acceptableMaxPreviousDay]="20"
+                               [maxAcceptableNumberOfDays]="8"
+                               [minAcceptableNumberOfDays]="3"
+                               (selectedRangeDate)="getSelectedRangeDate($event)"
+        ></app-date-range-picker>
+      </div>
 
     </div>
   </div>

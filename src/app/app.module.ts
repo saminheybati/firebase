@@ -24,33 +24,34 @@ import firebase from "firebase/compat";
 import initializeApp = firebase.initializeApp;
 import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
-import { CustomizedDialogComponent } from './sign-in/customized-dialog/customized-dialog.component';
+import {CustomizedDialogComponent} from './sign-in/customized-dialog/customized-dialog.component';
 import {AccessLevelsComponent} from "./access-levels/access-levels.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
-import { ManageUsersComponent } from './user-list/manage-users/manage-users.component';
+import {ManageUsersComponent} from './user-list/manage-users/manage-users.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
-import { PanelComponent } from './panel/panel.component';
+import {PanelComponent} from './panel/panel.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatMenuModule} from "@angular/material/menu";
-import { SavebarComponent } from './savebar/savebar.component';
+import {SavebarComponent} from './savebar/savebar.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
-import { AccessLevelTitleComponent } from './access-levels/access-level-title/access-level-title.component';
-import { ProfileComponent } from './profile/profile.component';
+import {AccessLevelTitleComponent} from './access-levels/access-level-title/access-level-title.component';
+import {ProfileComponent} from './profile/profile.component';
 import {ImageCropperModule} from "ngx-image-cropper";
-import { UploadImageComponent } from './profile/upload-image/upload-image.component';
+import {UploadImageComponent} from './profile/upload-image/upload-image.component';
 import {MyImageCropperComponent} from "./file-upload/component/image-cropper.component";
-import { ControlValueComponent } from './control-value/control-value.component';
-import { DatePickerComponent } from './date-picker/date-picker.component';
+import {ControlValueComponent} from './control-value/control-value.component';
+import {DatePickerComponent} from './date-picker/date-picker.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
-import { ConfirmationActionComponent } from './confirmation-action/confirmation-action.component';
-import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
+import {ConfirmationActionComponent} from './confirmation-action/confirmation-action.component';
+import {DateRangePickerComponent} from './date-range-picker/date-range-picker.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 const fireBaseConfig = {
   apiKey: "AIzaSyDWefPBJ3L7A5qYoQ4nkJNbTAasCW0OHZQ",
@@ -78,50 +79,51 @@ const fireBaseConfig = {
     AccessLevelTitleComponent,
     ProfileComponent,
     UploadImageComponent,
-    ControlValueComponent,
     DatePickerComponent,
-    ConfirmationActionComponent,
+    ControlValueComponent,
     DateRangePickerComponent,
+    ConfirmationActionComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        AngularFireDatabaseModule,
-        MatCardModule,
-      MatNativeDateModule,
-      MatDatepickerModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatProgressBarModule,
-        ImageCropperModule,
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AngularFireModule.initializeApp(fireBaseConfig),
-        provideFirestore(() => getFirestore()),
-        BrowserAnimationsModule,
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        AngularFireStorageModule,
-        FormsModule,
-        MatButtonModule,
-        MatTableModule,
-        MatDialogModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatSelectModule,
-        MatTabsModule,
-        MatProgressSpinnerModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatListModule,
-        MatExpansionModule,
-        MatMenuModule,
-        MatPaginatorModule,
-        MatDatepickerModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AngularFireDatabaseModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressBarModule,
+    ImageCropperModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(fireBaseConfig),
+    provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    FormsModule,
+    MatButtonModule,
+    MatTableModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatExpansionModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatDatepickerModule
+  ],
   providers: [DataBaseService,
-    { provide: FIREBASE_OPTIONS, useValue: fireBaseConfig }
+    {provide: FIREBASE_OPTIONS, useValue: fireBaseConfig}
   ],
   bootstrap: [AppComponent]
 })

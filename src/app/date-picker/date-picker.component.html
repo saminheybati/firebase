@@ -2,8 +2,7 @@
 <!--  <div [formGroup]="dateForm">-->
         <mat-form-field>
           <mat-label>{{label}}</mat-label>
-          <input matInput [matDatepicker]="dp1" [formControl]="control"
-                 [min]="minDate" [max]="maxDate" >
+          <input matInput [matDatepicker]="dp1" [formControl]="control">
           <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
           <mat-datepicker #dp1 ngDefaultControl [disabled]="disable"></mat-datepicker>
     </mat-form-field>

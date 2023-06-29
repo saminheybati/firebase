@@ -28,11 +28,15 @@ export class UserListComponent implements OnInit, AfterViewInit {
   newDataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   timeTest = 15445658888
-  disableFilter=true
+  disableFilter = true
+
   constructor(private dataBaseService: DataBaseService,
               public dialog: MatDialog,
               private accessLevelService: AccessLevelsService) {
   }
+
+  startDate = new Date(1685910600000)
+  endDate = new Date(1687033800000)
 
   ngAfterViewInit(): void {
   }
@@ -48,7 +52,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
 
   getUsersList() {
     this.loader = true
-    this.disableFilter=true
+    this.disableFilter = true
     this.dataBaseService.getUsersList().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -63,7 +67,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
       setTimeout(() => this.totalElements = this.newDataSource.filteredData.length)
       setTimeout(() => this.newDataSource.paginator = this.paginator);
       this.loader = false
-      this.disableFilter=false
+      this.disableFilter = false
     });
   }
 
@@ -151,9 +155,13 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   getSelectedDate(event: Date) {
-    this.newDataSource.filter =event.getTime().toString().trim().toLowerCase();
+    this.newDataSource.filter = event.getTime().toString().trim().toLowerCase();
     if (this.newDataSource.paginator) {
       this.newDataSource.paginator.firstPage();
     }
+  }
+
+  getSelectedRangeDate(event: any) {
+    console.log('event',event)
   }
 }

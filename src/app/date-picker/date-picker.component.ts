@@ -36,10 +36,7 @@ export class DatePickerComponent implements ControlValueAccessor {
 
   now: any
 
-  constructor(private _dateAdapter: DateAdapter<any>) {
-    setInterval(() => {
-      this.now = new Date();
-    }, 1);
+  constructor() {
   }
 
   control!: FormControl;

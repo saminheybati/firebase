@@ -1,1 +1,11 @@
-<p>date-range-picker works!</p>
+<div style="display: flex;justify-content: center;margin-top: 50px">
+  <mat-form-field>
+    <mat-label>{{label}}</mat-label>
+    <mat-date-range-input [rangePicker]="picker" [min]="minDate" [max]="maxDate">
+      <input matStartDate placeholder="Start date" [formControl]="startDateControl" >
+      <input matEndDate placeholder="End date" [formControl]="endDateControl" >
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker  [disabled]="disable"></mat-date-range-picker>
+  </mat-form-field>
+</div>
