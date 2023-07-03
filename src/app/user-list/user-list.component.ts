@@ -8,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ManageUsersComponent} from "./manage-users/manage-users.component";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-user-list',
@@ -30,6 +31,8 @@ export class UserListComponent implements OnInit, AfterViewInit {
   timeTest = 15445658888
   disableFilter = true
 
+  dateControl!: FormControl;
+
   constructor(private dataBaseService: DataBaseService,
               public dialog: MatDialog,
               private accessLevelService: AccessLevelsService) {
@@ -42,6 +45,12 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    ///new
+    this.dateControl = new FormControl();
+    this.dateControl?.valueChanges.subscribe((res) => {
+      console.log("res from formControl",res)
+    });
+
     // console.log('this.timeTest', this.timeTest)
     var dateFormat = new Date(this.timeTest);
     // console.log('time', dateFormat)
@@ -154,12 +163,13 @@ export class UserListComponent implements OnInit, AfterViewInit {
     console.log("event", event)
   }
 
-  getSelectedDate(event: Date) {
-    this.newDataSource.filter = event.getTime().toString().trim().toLowerCase();
-    if (this.newDataSource.paginator) {
-      this.newDataSource.paginator.firstPage();
-    }
-  }
+  // getSelectedDate(event: Date) {
+  //   this.newDataSource.filter = event.getTime().toString().trim().toLowerCase();
+  //   if (this.newDataSource.paginator) {
+  //     this.newDataSource.paginator.firstPage();
+  //   }
+  // }
+
 
   getSelectedRangeDate(event: any) {
     console.log('event',event)

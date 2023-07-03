@@ -23,7 +23,7 @@
                          [disable]="disableFilter"
                          [acceptableMaxPreviousDay]="3"
                          [acceptableMaxNextDay]="3"
-                         (selectedDate)="getSelectedDate($event)"
+                         [formControl]="dateControl"
         ></app-date-picker>
       </div>
       <div style="margin-left: 50px">
@@ -37,6 +37,15 @@
                                [minAcceptableNumberOfDays]="3"
                                (selectedRangeDate)="getSelectedRangeDate($event)"
         ></app-date-range-picker>
+      </div>
+      <div style="margin-left: 50px">
+        <app-slider
+          [disabled]="false"
+          [max]="50"
+          [min]="10"
+          [step]="5"
+        >
+        </app-slider>
       </div>
 
     </div>

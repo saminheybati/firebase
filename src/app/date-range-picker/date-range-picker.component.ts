@@ -35,6 +35,7 @@ export class DateRangePickerComponent implements ControlValueAccessor {
     this.endDateControl.valueChanges.subscribe((value) => {
       if (value !== null) {
         if (this.checkValidation()) {
+          console.log(value)
           //////////////emit
         }
       }
@@ -62,7 +63,6 @@ export class DateRangePickerComponent implements ControlValueAccessor {
       } else {
         this.openSnackBar('Number of selected date must be less than ' + this.maxAcceptableNumberOfDays + ' days', 'ok')
         return false
-
       }
     } else
       this.openSnackBar('Number of selected date must be more than ' + this.minAcceptableNumberOfDays + ' days', 'ok')
