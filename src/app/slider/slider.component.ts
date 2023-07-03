@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
@@ -16,24 +16,35 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/for
 export class SliderComponent implements ControlValueAccessor {
 
   @Input() disabled: boolean
+  @Input() vertical: boolean
+  @Input() invert: boolean
   @Input() max: number
   @Input() min: number
   @Input() step: number
   @Input() thumbLabel: any
-  @Input() showTicks: any
+  @Input() defaultValue: number;
+  @Output() value = new EventEmitter<number>();
+
+
+  private onChange: any = () => {
+  };
+  private onTouched: any = () => {
+  };
+
 
 
   control!: FormControl;
 
   constructor() {
   }
-value
   ngOnInit(): void {
-    this.control = new FormControl();
+    this.control = new FormControl(this.defaultValue);
     console.log(this.control.value)
     this.control.valueChanges.subscribe((value) => {
       console.log('value',value)
-      ////emit
+      this.onChange(value);
+      this.onTouched();
+      this.value.emit(value)
     });
   }
 

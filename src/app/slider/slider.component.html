@@ -1,13 +1,17 @@
 
 <div style="display: flex;justify-content: center;margin-top: 50px">
   <mat-slider
-        class="example-margin"
-        [disabled]="disabled"
-        [max]="max"
-        [min]="min"
-        [step]="step"
-  >
-      <input matSliderThumb [formControl]="control">
-    </mat-slider>
-  <p>value:{{value}}</p>
+    class="example-margin"
+    [disabled]="disabled"
+    [max]="max"
+    [min]="min"
+    [step]="step"
+    [thumbLabel]="thumbLabel"
+    [tickInterval]="5"
+    [vertical]="vertical"
+    [invert]="invert"
+    [formControl]="control"
+    aria-labelledby="example-name-label">
+  </mat-slider>
 </div>
+

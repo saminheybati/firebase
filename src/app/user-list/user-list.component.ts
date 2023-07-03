@@ -32,6 +32,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   disableFilter = true
 
   dateControl!: FormControl;
+  sliderControl!: FormControl;
 
   constructor(private dataBaseService: DataBaseService,
               public dialog: MatDialog,
@@ -46,10 +47,15 @@ export class UserListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     ///new
+    this.sliderControl = new FormControl();
+    this.sliderControl?.valueChanges.subscribe((res) => {
+      console.log("res slider slider",res)
+    });
     this.dateControl = new FormControl();
     this.dateControl?.valueChanges.subscribe((res) => {
       console.log("res from formControl",res)
     });
+
 
     // console.log('this.timeTest', this.timeTest)
     var dateFormat = new Date(this.timeTest);
@@ -174,4 +180,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
   getSelectedRangeDate(event: any) {
     console.log('event',event)
   }
+
+
 }
