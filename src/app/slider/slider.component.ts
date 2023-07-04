@@ -48,13 +48,23 @@ export class SliderComponent implements ControlValueAccessor {
     });
   }
 
+  writeValue(value: any): void {
+    this.control.setValue(value);
+  }
+
   registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
-  writeValue(obj: any): void {
+  setDisabledState?(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.control.disable();
+    } else {
+      this.control.enable();
+    }
   }
-
 }
